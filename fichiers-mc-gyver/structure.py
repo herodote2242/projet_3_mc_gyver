@@ -1,5 +1,12 @@
+#!/usr/bin/python3
+# -*- coding: Utf-8 -*
+
+from objets import *
+from mc_gyver import *
+from gardien import *
 from structure_modifiable import Structure
 import json
+import pygame
 
 
 class Maze:
@@ -7,17 +14,24 @@ class Maze:
 a rectangular maze made of 15 sprites width and 15 sprites height
 """
 
-	def __init__(self, display):
+	def __init__(self, data):
+		#initialisation of the window maze
+		self.data = data
+		self.structure = 0
 		pass
-#initialisation of the window maze
 
 
-	def read_values_from_json(self, window):
-		line = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, P]
-			for line in self.structure_modifiable:
-				for sprite in line:
-					print sprite
-# sprites are displayed according to blanks or # in structure_modifiable.py
+	def generate_maze():
+	    # sprites are displayed according to blanks or # in structure_modifiable.py
+	    with open('structure_modifiable.json', 'r') as f:
+	      data = json.load(f)
+
+	    for line in data:
+	      print("".join(line))
+
+
+generate_maze()
+
 
 
 if __name__ == "__main__":
