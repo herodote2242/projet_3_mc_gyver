@@ -7,9 +7,10 @@ from gardien import *
 
 class Mc_gyver:
 	
-	def __init__(self, right, left, up, down):
+	def __init__(self, structure):
 		self.case_x = 1
 		self.case_y = 1
+		self.structure = structure
 
 
 	def moves(self, direction):
@@ -23,29 +24,30 @@ class Mc_gyver:
 				self.case_x -= 1
 
 		if direction == 'up':
-			if self.structure_modifiable[self.case_y-1][self.case_x] != '#':
+			if self.structure[self.case_y-1][self.case_x] != '#':
 				self.case_y -= 1
 
 		if direction == 'down':
-			if self.structure_modifiable[self.case_y+1][self.case_x] != '#':
+			if self.structure[self.case_y+1][self.case_x] != '#':
 				self.case_y += 1
 
-#loop of the game : Mc Gyver is moving until the exit
-while Mc_gyver.self.case_x, Mc-gyver.self.case_y != 14, 14:
+		if Mc_gyver.self.case_x, Mc_gyver.self.case_y = 14, 14:
+			end = True
 
-	for event in py:
+
+def main():
+	#loop of the game : Mc Gyver is moving until the exit
+
+	end = False
+
+	while not end:
 		#to be replaced by "for event in pygame.event.get()" when importing pygame
-		if event.key == K_RIGHT:
-			Mc_gyver.moves('right')
+		response = input("where do you want to go?")
 
-		if event.key == K_LEFT:
-			Mc_gyver.moves('left')
+		if response in ["left", "right", "up", "down"]:
+			Mc_gyver.moves(response)
 
-		if event.key == K_UP:
-			Mc_gyver.moves('up')
-
-		if event.key == K_DOWN:
-			Mc_gyver.moves('down')
+		#up to date maze after each movement
 
 	if Mc_gyver.self.case_x, Mc-gyver.self.case_y = 14, 14:
 		print("You win !")
