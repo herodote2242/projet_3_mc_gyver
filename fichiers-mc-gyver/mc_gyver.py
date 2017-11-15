@@ -47,7 +47,10 @@ def main():
 		if response in ["left", "right", "up", "down"]:
 			Mc_gyver.moves(response)
 
-		#up to date maze after each movement
+		# up to date of the maze when pygame imported:
+		# pygame.display.flip()
+		# otherwise :
+		maze.display()
 
 	if Mc_gyver.self.case_x, Mc-gyver.self.case_y = 14, 14:
 		print("You win !")
