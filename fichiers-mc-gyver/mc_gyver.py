@@ -51,34 +51,35 @@ class Mc_gyver:
 
 		end = False
 		is_wall = False
-		is_guardian = False
+		is_guardian = True
 
 
 		if direction == 'right':
-			if is_wall(self.structure[self.case_y][self.case_x+1]) = False:
+			if is_wall(self.structure[self.case_y][self.case_x+1]):
 				self.case_x += 1
 
 		elif direction == 'left':
-			if is_wall(self.structure[self.case_y][self.case_x-1]) = False:
+			if is_wall(self.structure[self.case_y][self.case_x-1]):
 				self.case_x -= 1
 
 		elif direction == 'up':
-			if is_wall(self.structure[self.case_y-1][self.case_x]) = False:
+			if is_wall(self.structure[self.case_y-1][self.case_x]):
 				self.case_y -= 1
 
 		elif direction == 'down':
-			if is_wall(self.structure[self.case_y+1][self.case_x]) = False:
+			if is_wall(self.structure[self.case_y+1][self.case_x]):
 				self.case_y += 1
 
-		if is_guardian(self.structure[self.case_x][self.case_y]) = True:
+		if is_guardian(self.structure[self.case_x][self.case_y]):
 			end = True
 
+	return end
 	
 
 
 def main():
 	"""
-	loop of the game : Mc Gyver is moving until the exit
+	loop of the game : Mc Gyver is moving to the exit
 	"""
 
 	Mc_gyver = Mc_gyver(structure)
@@ -87,7 +88,7 @@ def main():
 
 	while not end:
 		#to be replaced by "for event in pygame.event.get()" when importing pygame
-		response = input("Where do you want to go? left, right, up, down ? Or quit ?)
+		response = input("Where do you want to go? left, right, up, down ? Or quit ?")
 
 		if response in ["left", "right", "up", "down", "quit"]:
 			end = Mc_gyver.move(response)
@@ -97,7 +98,7 @@ def main():
 		# otherwise :
 		maze.display()
 
-	if is_guardian(self.structure[self.case_x][self.case_y]) = True:
+	if is_guardian(self.structure[self.case_x][self.case_y]):
 		print("You win !")
 		#add an automatic function "exit window"
 
