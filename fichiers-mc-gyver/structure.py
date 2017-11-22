@@ -125,3 +125,4 @@ class Application:
 			self.window.blit(fond (0,0))
 			self.window.blit(Mc_gyver.move, (case_x, case_y))
 			pygame.display.flip()
+
