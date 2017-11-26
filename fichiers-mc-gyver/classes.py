@@ -118,6 +118,8 @@ class Object:
 
 # -tc- Ta n'as pas encore créé needle, ether et tube. Il te faut
 # -tc- les créer explicitement: needle = Object('N'), par exemple.
+# -tc- Comme les objets sont définis dans decor, il suffit de définir
+# -tc- objects = [decor.needle, decor.ether, decor.tube]
 objects = [needle, ether, tube]
 
 for item in objects:
@@ -249,6 +251,8 @@ class Application:
 						Mc_gyver.move('down')
 
 			#refreshing the window
+			# -tc- La méthode blit prend deux paramètres
 			self.window.blit(fond (0,0))
+			# -tc- move n'est pas une propriété statique de la classe Mc_gyver
 			self.window.blit(Mc_gyver.move, (case_x, case_y))
 			pygame.display.flip()
