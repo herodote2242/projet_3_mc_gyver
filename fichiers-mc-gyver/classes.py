@@ -2,13 +2,15 @@
 # -*- coding: Utf-8 -*
 
 # -tc- pour la première ligne du fichier, utilise plutôt
-# #!/usr/bin/env python3 qui a l'avantage d'être plus portable
+# -tc- #!/usr/bin/env python3 qui a l'avantage d'être plus portable
 
 import structure
 import gardien
 
 # -tc- Evite de mettre toutes les classes dans un même fichier
 
+# -tc- Si on regarde ce qui se fait en nommage de classes, on 
+# -tc- utilisera plus volontier MyGyver que Mc_Gyver.  
 class Mc_gyver:
 	# -tc- Ne met pas d'espace entre le nom de la classe et la docstring
 	"""
@@ -16,14 +18,19 @@ class Mc_gyver:
 	"""
 
 	def __init__(self, structure):
+		# -tc- Quelle est la différence entre (case_x, case_y) et (x, y)?
 		# Mac Gyver's position
 		self.case_x = 1
 		self.case_y = 1
 		self.x = 1
 		self.y = 1
 		self.structure = structure
+		# -tc- On peut éventuellement ajouter une propriété self.object_number
+		# -tc- et l'initialiser à zéro
 
 
+	# -tc- On peut éventuellement utiliser un méthode increment_object_number()
+	# -tc- qui va incrémenter self.object_number() à chaque appel
 	def count_objects():
 		pass
 		#to be replaced by une function when objects implemented
@@ -32,17 +39,23 @@ class Mc_gyver:
 	def move(self, direction):
 		"""Mac Gyver's movements in the maze"""
 		
+		# -tc- Ta fonction interne is_wall() ne fait pas ce que tu veux
+		# -tc- Crée plutôt des méthodes pour is_wall et is_guardian() plutôt
+		# -tc- que des fonctions internes
 		def is_wall():
 			"""
 			verification of the existence of a wall allowing or not the movement
 			"""
 			if self.structure[self.case_x][self.case_y] == "#":
+				# -tc- c'est plutôt return True. Tu ne peux pas affecter une
+				# -tc- valeur à une fonction de cette manière
 				is_wall(self.structure) = True
 
 			else:
 				is_wall(self.structure) = False
 
 
+		# -tc- Remarques similaire à is_wall()
 		def is_guardian():
 			"""
 			verification of the presence of the guardian
@@ -55,13 +68,20 @@ class Mc_gyver:
 
 
 
+		# -tc- ici, tu écrases tes fonctions ci-dessus en affectant à is_wall
+		# -tc- et is_guardian de nouvelle valeurs
 		end = False
 		is_wall = False
 		is_guardian = True
 
 
+		# -tc- Systématiquement, les instructions ci-dessous te permettent de te
+		# -tc- déplacer sur un mur.
 		if direction == 'right':
+			# -tc- Attention, is_wall a écrasée. Ce n'est plus une fonction. Par ailleurs,
+			# -tc- comme défini plus haut, is_wall() ne prend pas de'argument
 			if is_wall(self.structure[self.case_y][self.case_x+1]):
+				# -tc- si je traduis tes intentions: SI mur à droite, aller à droite
 				self.case_x += 1
 
 		elif direction == 'left':
@@ -79,6 +99,7 @@ class Mc_gyver:
 		if is_guardian(self.structure[self.case_x][self.case_y]):
 			end = True
 
+	# -tc- Attention, return end est mal indenté
 	return end
 	
 
