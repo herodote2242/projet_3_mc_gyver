@@ -107,18 +107,26 @@ class Mc_gyver:
 
 
 class Object:
+	# -tc- N'oublie pas d'ajouter une documentation à chaque classe que tu crées
 
 	def __init__(self, representation):
+		# -tc- N'oublie pas d'ajouter une documentation éà chaque méthode
 		self.representation = representation
 
 
+
+# -tc- Ta n'as pas encore créé needle, ether et tube. Il te faut
+# -tc- les créer explicitement: needle = Object('N'), par exemple.
 objects = [needle, ether, tube]
 
 for item in objects:
 
+	# -tc- tes items n'on pas de propriété case_x ou case_y
 	item.case_y = randrange(1, 14)
 	item.case_x = randrange(1, 14)
 
+	# -tc- Pour tester l'appartenance, tu peux utiliser l'opérateur in.
+	# -tc- Par ailleurs, tes objets ne continent pas de propriété structure
 	if needle.structure[needle.case_x][needle.case_y] == "#", "m", "g":
 		needle.case_y = randrange(1, 14)
 		needle.case_x = randrange(1, 14)
@@ -131,6 +139,7 @@ for item in objects:
 		ether.case_y = randrange(1, 14)
 		ether.case_x = randrange(1, 14)
 
+	# -tc- les Object n'ont pour l'instance pas de méthode display()
 	item.display()
 
 
