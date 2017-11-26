@@ -6,6 +6,7 @@
 
 import structure
 import gardien
+# -tc- Attention, tu dois également faire un import decor
 
 # -tc- Evite de mettre toutes les classes dans un même fichier
 
@@ -162,16 +163,21 @@ class Maze:
 		"""
 		method allowing the construction of the graphic maze with images
 		"""
+		# -tc- Attention à importer decor au début du fichier et à ensuite
+		# -tc- charger decor.image_wall ainsi que les autres images
 		wall = pygame.image.load(image_wall).convert()
 		path = pygame.image.load(image_path).convert()
 		guardian = pygame.image.load(image_guardian).convert_alpha()
 		macgyver = pygame.image.load(image_macgyver).convert_alpha()
 		line_number = 0
 
+		# -tc- Plus pythonique: for line_number, line in enumerate(self.structure):
 		for line in self.structure:
 			case_number = 0
 
+			# -tc- Plus pytonique: for case_number, sprite in enumerate(line):
 			for sprite in line:
+				# -tc- importer decor et faire x = case_number * decor.sprite_dimension
 				x = case_number * sprite_dimension
 				y = line_number * sprite_dimension
 
@@ -183,12 +189,15 @@ class Maze:
 
 				elif sprite == 'g':
 					window.blit(guardian, (x,y))
+				# -tc- devient inutile si tu utilises enumerate()
 				case_number += 1
+			# -tc- devient inutile si tu utilises enumerate()
 			line_number += 1
 
 
 
 
+# -tc- attention: pas d'espace en le nom de la classe et le nom de la docstring
 class Application:
 
 
@@ -198,14 +207,17 @@ class Application:
 	def __init__(self):
 
 		self.window = pygame.display.set_mode((600, 600))
+		# -tc- Attention: le nom de l'image doit être une chaine de caractères
 		self.icone = pygame.image.load(img_macgyver.png)
 		pygame.display.set_icon(icone)
 		pygame.display.set_caption("Mc Gyver's Maze")
+		# -tc- la classe Mc_gyver prend la structure en paramètre de son constructeur
 		self.m = Mc_gyver("img_macgyver.png")
 
 
 	def startgame(self):
 		#game loop
+		# -tc- Utiliser un nom de variable plus explicite, comme game_continue
 		game = 1
 		while game :
 
@@ -219,6 +231,7 @@ class Application:
 				#possibility of closing the window
 				elif event == KEYDOWN:
 
+					# -tc- Donc espace te fait quitter le programme ?
 					if event.key == K_ESCAPE:
 						game = 0
 
