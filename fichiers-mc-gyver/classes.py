@@ -1,13 +1,16 @@
 #!/usr/bin/python3
 # -*- coding: Utf-8 -*
 
+# -tc- pour la première ligne du fichier, utilise plutôt
+# #!/usr/bin/env python3 qui a l'avantage d'être plus portable
+
 import structure
 import gardien
 
-
+# -tc- Evite de mettre toutes les classes dans un même fichier
 
 class Mc_gyver:
-	
+	# -tc- Ne met pas d'espace entre le nom de la classe et la docstring
 	"""
 	creation of the class Mc_Gyver, allowing to define his position and its movement method
 	"""
