@@ -1,19 +1,12 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import random
+import classes
 
-
-needle = Object('N')
-tube = Object('T')
-ether = Object('E')
-Mc_gyver = Object('m')
-Guardian = Object('g')
-
-Mc_gyver.case_x = 1
-Mc_gyver.case_y = 1
-Guardian.case_x = 14
-Guardian.case_y = 14
+classes.Mc_gyver.case_x = 1
+classes.Mc_gyver.case_y = 1
+classes.Guardian.case_x = 14
+classes.Guardian.case_y = 14
 
 
 """

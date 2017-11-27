@@ -1,30 +1,25 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
 import json
 import pygame
-from decor import *
-from classes import *
+import decor
+import classes
 
 pygame.init()
 
-# creating instances from the differents classes
-maze = Maze()
+# creating instances from the different classes
+maze = Maze(structure)
 
-mc_gyver = Mc_gyver()
-
-needle = Object('N')
-tube = Object('T')
-ether = Object('E')
-Mc_gyver = Object('m')
-Guardian = Object('g')
+mc_gyver = McGyver(structure)
 
 application = Application()
 
 
-"""
-to be added : playing theme song
-"""
+#playing theme song looping for ever
+sound = pygame.mixer.music.load('Mac_Gyver_theme_song.mp3')
+pygame.mixer.music.play(-1, 0.0)
+
 
 maze.display()
 application.startgame()
@@ -36,4 +31,3 @@ end = False
 while not end:
 	startgame()
 	move()
-

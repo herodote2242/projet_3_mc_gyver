@@ -1,109 +1,125 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import structure
-import gardien
+import labyrinthe
+import decor
+import structure_modifiable
 
 
 
-class Mc_gyver:
-	
+class McGyver:
 	"""
-	creation of the class Mc_Gyver, allowing to define his position and its movement method
+	creation of the class McGyver, allowing to define his position and its movement method
 	"""
 
 	def __init__(self, structure):
 		# Mac Gyver's position
 		self.case_x = 1
 		self.case_y = 1
-		self.x = 1
-		self.y = 1
 		self.structure = structure
+		self.object_number = 0
 
 
-	def count_objects():
-		pass
-		#to be replaced by une function when objects implemented
+	def increment_object_number():
+		"""
+		function to count the number of picked up objects
+		"""
+		self.object_number += 1
+		# to be improved with the condition of walking on the sprite and fading it
 
 
 	def move(self, direction):
-		"""Mac Gyver's movements in the maze"""
+		"""
+		Mac Gyver's movements in the maze
+		"""
 		
-		def is_wall():
-			"""
-			verification of the existence of a wall allowing or not the movement
-			"""
-			if self.structure[self.case_x][self.case_y] == "#":
-				is_wall(self.structure) = True
 
-			else:
-				is_wall(self.structure) = False
+		"""
+		verification of the existence of a wall allowing or not the movement
+		"""
+		if self.structure[self.case_x][self.case_y] == "#":
+			wall = True
 
-
-		def is_guardian():
-			"""
-			verification of the presence of the guardian
-			"""
-			if self.structure[self.case_x][self.case_y] == "g":
-				is_guardian(self.structure) = True
-
-			else:
-				is_guardian(self.structure) = False
+		else:
+			wall = False
 
 
+		"""
+		verification of the presence of the guardian
+		"""
+		if self.structure[self.case_x][self.case_y] == "g":
+			guardian = True
 
-		end = False
-		is_wall = False
-		is_guardian = True
+		else:
+			guardian = False
 
 
+		"""
+		defining the different movements
+		"""
 		if direction == 'right':
-			if is_wall(self.structure[self.case_y][self.case_x+1]):
+			if self.structure[self.case_y][self.case_x+1] != wall:
 				self.case_x += 1
 
 		elif direction == 'left':
-			if is_wall(self.structure[self.case_y][self.case_x-1]):
+			if self.structure[self.case_y][self.case_x-1] != wall:
 				self.case_x -= 1
 
 		elif direction == 'up':
-			if is_wall(self.structure[self.case_y-1][self.case_x]):
+			if self.structure[self.case_y-1][self.case_x] != wall:
 				self.case_y -= 1
 
 		elif direction == 'down':
-			if is_wall(self.structure[self.case_y+1][self.case_x]):
+			if self.structure[self.case_y+1][self.case_x] != wall:
 				self.case_y += 1
 
-		if is_guardian(self.structure[self.case_x][self.case_y]):
+		if self.structure[self.case_x][self.case_y] == guardian:
 			end = True
 
-	return end
+		return end
 	
 
 
 
 
 class Object:
+	"""
+	creation of the class Objects, allowing random creation on the maze
+	"""
 
-	def __init__(self, representation):
-		self.representation = representation
+	def __init__(self, structure, display):
+		"""
+		initializing the objects representation
+		"""
+		self.display = display
+		self.structure = structure
+		self.case_x = case_x
+		self.case_y = case_y
 
 
-objects = [needle, ether, tube]
 
-for item in objects:
+needle = Object('N')
+tube = Object('T')
+ether = Object('E')
+Mc_gyver = Object('m')
+Guardian = Object('g')
+objects = [decor.needle, decor.ether, decor.tube]
+
+
+for item in syringe:
 
 	item.case_y = randrange(1, 14)
 	item.case_x = randrange(1, 14)
 
-	if needle.structure[needle.case_x][needle.case_y] == "#", "m", "g":
+	if needle.structure[needle.case_x][needle.case_y] in ["#", "m", "g"]:
 		needle.case_y = randrange(1, 14)
 		needle.case_x = randrange(1, 14)
 	
-	if tube.structure[tube.case_x][tube.case_y] == "#", "N", "m", "g":
+	if tube.structure[tube.case_x][tube.case_y] in ["#", "N", "m", "g"]:
 		tube.case_y = randrange(1, 14)
 		tube.case_x = randrange(1, 14)
 
-	if ether.structure[ether.case_x][ether.case_y] == "#", "N", "T", "m", "g":
+	if ether.structure[ether.case_x][ether.case_y] in ["#", "N", "T", "m", "g"]:
 		ether.case_y = randrange(1, 14)
 		ether.case_x = randrange(1, 14)
 
@@ -129,18 +145,18 @@ class Maze:
 		"""
 		method allowing the construction of the graphic maze with images
 		"""
-		wall = pygame.image.load(image_wall).convert()
-		path = pygame.image.load(image_path).convert()
-		guardian = pygame.image.load(image_guardian).convert_alpha()
-		macgyver = pygame.image.load(image_macgyver).convert_alpha()
+		wall = deco.pygame.image.load(image_wall).convert()
+		path = decor.pygame.image.load(image_path).convert()
+		guardian = decor.pygame.image.load(image_guardian).convert_alpha()
+		macgyver = decor.pygame.image.load(image_macgyver).convert_alpha()
 		line_number = 0
 
-		for line in self.structure:
+		for line_number, line in enumerate(self.structure):
 			case_number = 0
 
-			for sprite in line:
-				x = case_number * sprite_dimension
-				y = line_number * sprite_dimension
+			for case_number, sprite in enumerate(line):
+				x = case_number * decor.sprite_dimension
+				y = line_number * decor.sprite_dimension
 
 				if sprite == '#':
 					window.blit(wall, (x,y))
@@ -150,31 +166,30 @@ class Maze:
 
 				elif sprite == 'g':
 					window.blit(guardian, (x,y))
-				case_number += 1
-			line_number += 1
 
 
 
 
 class Application:
-
-
 	"""
 	a class launching the game when opening labyrinth.py
 	"""
-	def __init__(self):
 
+	def __init__(self):
+		"""
+		initializing application class
+		"""
 		self.window = pygame.display.set_mode((600, 600))
-		self.icone = pygame.image.load(img_macgyver.png)
+		self.icone = pygame.image.load("img_macgyver.png")
 		pygame.display.set_icon(icone)
 		pygame.display.set_caption("Mc Gyver's Maze")
-		self.m = Mc_gyver("img_macgyver.png")
+		self.m = McGyver("img_macgyver.png", structure)
 
 
 	def startgame(self):
 		#game loop
-		game = 1
-		while game :
+		game_continue = 1
+		while game_continue:
 
 			pygame.time.clock().tick(30)
 
@@ -203,6 +218,6 @@ class Application:
 						Mc_gyver.move('down')
 
 			#refreshing the window
-			self.window.blit(fond (0,0))
-			self.window.blit(Mc_gyver.move, (case_x, case_y))
+			self.window.blit(fond, (0,0))
+			self.window.blit(McGyver.move(), (case_x, case_y))
 			pygame.display.flip()
