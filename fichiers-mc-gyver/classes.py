@@ -1,22 +1,39 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+from random import randrange
+
 import labyrinthe
 import decor
 import structure_modifiable
 
+WALL = '#'
+
+class Object:
+	"""
+	creation of the class Objects, allowing random creation on the maze
+	"""
+
+	def __init__(self, display, structure):
+		"""
+		initializing the objects representation
+		"""
+		self.display = display
+		self.structure = structure
+		self.case_x = 0
+		self.case_y = 0
 
 
-class McGyver:
+class McGyver(Object):
 	"""
 	creation of the class McGyver, allowing to define his position and its movement method
 	"""
 
-	def __init__(self, structure):
+	def __init__(self, display, structure):
 		# Mac Gyver's position
+		super().__init__(display, structure)
 		self.case_x = 1
 		self.case_y = 1
-		self.structure = structure
 		self.object_number = 0
 
 
@@ -27,85 +44,50 @@ class McGyver:
 		self.object_number += 1
 		# to be improved with the condition of walking on the sprite and fading it
 
-
+	# -tc- La fonction move a été retravaillée un peu pendant la session. Assure-toi
+	# -tc- que tu comprends bien ce qu'on a fait et pose des questions dans le cas
+	# -tc- contraire
 	def move(self, direction):
 		"""
 		Mac Gyver's movements in the maze
 		"""
-		
 
-		"""
-		verification of the existence of a wall allowing or not the movement
-		"""
-		if self.structure[self.case_x][self.case_y] == "#":
-			wall = True
-
-		else:
-			wall = False
-
-
-		"""
-		verification of the presence of the guardian
-		"""
-		if self.structure[self.case_x][self.case_y] == "g":
-			guardian = True
-
-		else:
-			guardian = False
-
-
-		"""
-		defining the different movements
-		"""
+		# defining the different movements
 		if direction == 'right':
-			if self.structure[self.case_y][self.case_x+1] != wall:
+			if self.structure[self.case_y][self.case_x+1] != WALL:
 				self.case_x += 1
 
 		elif direction == 'left':
-			if self.structure[self.case_y][self.case_x-1] != wall:
+			if self.structure[self.case_y][self.case_x-1] != '#':
 				self.case_x -= 1
 
 		elif direction == 'up':
-			if self.structure[self.case_y-1][self.case_x] != wall:
+			if self.structure[self.case_y-1][self.case_x] != '#':
 				self.case_y -= 1
 
 		elif direction == 'down':
 			if self.structure[self.case_y+1][self.case_x] != wall:
 				self.case_y += 1
 
-		if self.structure[self.case_x][self.case_y] == guardian:
-			end = True
+		# verification of the presence of the guardian
+		if self.structure[self.case_x][self.case_y] == "g":
+			return True
+		else:
+			return False
 
-		return end
-	
+# -tc- Nous avons modifié certaines créations d'objets. Attention aux paramètres
+# -tc- pris par le constructeur.
+maze = Maze()
+needle = Object('N', maze)
+tube = Object('T', maze)
+ether = Object('E', maze)
+# -tc La classe Mc_gyver a été renommée en McGyver
+mcgyver = McGyver('m', maze)
+guardian = Object('g',maze)
+objects = [needle, ether, tube]
 
-
-
-
-class Object:
-	"""
-	creation of the class Objects, allowing random creation on the maze
-	"""
-
-	def __init__(self, structure, display):
-		"""
-		initializing the objects representation
-		"""
-		self.display = display
-		self.structure = structure
-		self.case_x = case_x
-		self.case_y = case_y
-
-
-
-needle = Object('N')
-tube = Object('T')
-ether = Object('E')
-Mc_gyver = Object('m')
-Guardian = Object('g')
-objects = [decor.needle, decor.ether, decor.tube]
-
-
+# -tc- Revoir l'algorithme de positionnement aléatoire pour les objets, comme
+# -tc- discuté à la session
 for item in syringe:
 
 	item.case_y = randrange(1, 14)
@@ -145,6 +127,7 @@ class Maze:
 		"""
 		method allowing the construction of the graphic maze with images
 		"""
+
 		wall = deco.pygame.image.load(image_wall).convert()
 		path = decor.pygame.image.load(image_path).convert()
 		guardian = decor.pygame.image.load(image_guardian).convert_alpha()
