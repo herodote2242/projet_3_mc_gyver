@@ -140,7 +140,6 @@ class Maze:
 		with open('structure_modifiable.json', 'r') as f:
 			self.data = json.load(f)
 
-
 	def display(self, window):
 		"""
 		method allowing the construction of the graphic maze with images
@@ -149,15 +148,20 @@ class Maze:
 		path = decor.pygame.image.load(image_path).convert()
 		guardian = decor.pygame.image.load(image_guardian).convert_alpha()
 		macgyver = decor.pygame.image.load(image_macgyver).convert_alpha()
+
+        # -tc- l'initialisation de line_number ne sert à rien, car elle est redéfinie
+        # -tc- plus bas dans la boucle for
 		line_number = 0
 
 		for line_number, line in enumerate(self.structure):
+            # -tc- case_number est inutile puisqu'il est redéfini dessous
 			case_number = 0
 
 			for case_number, sprite in enumerate(line):
 				x = case_number * decor.sprite_dimension
 				y = line_number * decor.sprite_dimension
 
+                # -tc- bien
 				if sprite == '#':
 					window.blit(wall, (x,y))
 
@@ -179,10 +183,13 @@ class Application:
 		"""
 		initializing application class
 		"""
+        # -tc- ne pas oublier d'appeler pygame.init()
 		self.window = pygame.display.set_mode((600, 600))
 		self.icone = pygame.image.load("img_macgyver.png")
+        # -tc- attention, icone n'est pas défini dans ce module
 		pygame.display.set_icon(icone)
 		pygame.display.set_caption("Mc Gyver's Maze")
+        # -tc- où est créée structure?
 		self.m = McGyver("img_macgyver.png", structure)
 
 
@@ -196,28 +203,37 @@ class Application:
 			for event in pygame.event.get():
 
 				if event.type == QUIT:
+                    # -tc- j'imagine qu'il s'agit de game_continue
 					game = 0
 
 				#possibility of closing the window
 				elif event == KEYDOWN:
 
 					if event.key == K_ESCAPE:
+                        # -tc- game_continue?
 						game = 0
 
 					#events of mc-gyver's moves
 					elif event.key == K_RIGHT:
+                        # -tc- C'est probablement l'objet self.m que tu veux manipuler ici
 						Mc_gyver.move('right')
 
 					elif event.key == K_LEFT:
+                        # -tc- C'est probablement l'objet self.m que tu veux manipuler ici
 						Mc_gyver.move('left')
 
 					elif event.key == K_UP:
+                        # -tc- C'est probablement l'objet self.m que tu veux manipuler ici
 						Mc_gyver.move('up')
 
 					elif event.key == K_DOWN:
+                        # -tc- C'est probablement l'objet self.m que tu veux manipuler ici
 						Mc_gyver.move('down')
 
 			#refreshing the window
 			self.window.blit(fond, (0,0))
+            # -tc- C'est probablement l'objet self.m que tu veux manipuler ici
 			self.window.blit(McGyver.move(), (case_x, case_y))
 			pygame.display.flip()
+
+            # -tc- la méthode display de Maze n'est jamais appelée?
