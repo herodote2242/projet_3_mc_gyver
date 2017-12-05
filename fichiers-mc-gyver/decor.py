@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import classes
+import ClassMcGyver
+import structure_modifiable
+import ClassObject
 
 classes.Mc_gyver.case_x = 1
 classes.Mc_gyver.case_y = 1
