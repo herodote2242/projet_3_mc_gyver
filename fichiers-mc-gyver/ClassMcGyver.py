@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import ClassObject
+import ClassObject as obj
 
-class McGyver(Object):
+# -tc- Ne pas oublier de préfixer Obj avec le nom du module qui la définit
+class McGyver(obj.Object):
 	"""
 	creation of the class McGyver, allowing to define his position and its movement method
 	"""

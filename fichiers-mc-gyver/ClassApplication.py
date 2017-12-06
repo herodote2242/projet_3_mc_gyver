@@ -65,3 +65,11 @@ class Application:
 			self.window.blit(fond, (0,0))
 			self.window.blit(self.m(), (case_x, case_y))
 			pygame.display.flip()
+
+# -tc- Code de test
+def main():
+	app = Application()
+
+
+if "__name__" == "__main__":
+	main()

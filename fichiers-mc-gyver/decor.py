@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+# -tc- Attention aux imports, qui ne sont pas toujours utiles
 import ClassMcGyver
-import structure_modifiable
+# -tc- le module structure_modifiable n'existe pas
+# import structure_modifiable
 import ClassObject
 
-classes.Mc_gyver.case_x = 1
-classes.Mc_gyver.case_y = 1
-classes.Guardian.case_x = 14
-classes.Guardian.case_y = 14
-
+# -tc- Comme classes n'existe pas, ces lignes donnent des erreurs
+# classes.Mc_gyver.case_x = 1
+# classes.Mc_gyver.case_y = 1
+# classes.Guardian.case_x = 14
+# classes.Guardian.case_y = 14
 
 """
 defining the different element's of the window

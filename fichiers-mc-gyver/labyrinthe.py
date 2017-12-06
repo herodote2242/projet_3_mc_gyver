@@ -4,5 +4,7 @@
 import ClassApplication
 
 
-application = ClassApplication.Application()
-#application.startgame()
+# -tc- On place le code executable sous cette condition
+if __name__ == "__name__":
+	application = ClassApplication.Application()
+	application.startgame()
