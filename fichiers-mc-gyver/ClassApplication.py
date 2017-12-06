@@ -34,6 +34,10 @@ class Application:
 		pygame.display.set_caption("Mc Gyver's Maze")
 		# à voir si besoin de garder ou pas:
 		# self.m = McGyver("images/img_macgyver.png", structure)
+		self.background = pygame.Surface((600, 600))
+		self.background.fill((255, 255, 255))
+		self.window.blit(self.background, (0, 0))
+		pygame.display.flip()
 
 
 	def startgame(self):

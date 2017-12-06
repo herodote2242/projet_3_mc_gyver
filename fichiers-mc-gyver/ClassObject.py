@@ -22,7 +22,7 @@ class Object:
 	creation of the class Objects, allowing random creation on the maze
 	"""
 
-	# -tc- D'où viennent les case_x et case_y pour initialiser self.case_x et self.case_y ?
+	# -tc- D'où viennent les case_x et case_y pour initcleaialiser self.case_x et self.case_y ?
 	# -tc- Je rajoute des arguments avec des valeurs par défaut pour éviter les
 	#-tc- les erreurs.
 	def __init__(self, structure, display, case_x=0, case_y=0):
@@ -37,7 +37,7 @@ class Object:
 # -tc- Placer tout le code executable en dessous de cette condition, comme vu dans les cours
 # -tc- permettra de t'éviter bien des problèmes. C'est notamment ça qui génére pas mal
 # -tc- d'erreurs dans ton code actuel
-if "__name__" == "__main__":
+if __name__ == "__main__":
 	# -tc- Ne pas oublier de prefixer chaque classe avec le nom de module qui la pré-définit
 	maze = maze.Maze()
 	needle = obj.Object('N', maze)
