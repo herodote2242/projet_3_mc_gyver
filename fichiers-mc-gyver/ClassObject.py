@@ -22,7 +22,10 @@ class Object:
 	creation of the class Objects, allowing random creation on the maze
 	"""
 
-	def __init__(self, structure, display):
+	# -tc- D'où viennent les case_x et case_y pour initialiser self.case_x et self.case_y ?
+	# -tc- Je rajoute des arguments avec des valeurs par défaut pour éviter les
+	#-tc- les erreurs.
+	def __init__(self, structure, display, case_x=0, case_y=0):
 		"""
 		initializing the objects representation
 		"""
@@ -53,7 +56,7 @@ if "__name__" == "__main__":
 		if needle.structure[needle.case_x][needle.case_y] in ["#", "m", "g"]:
 			needle.case_y = randrange(1, 14)
 			needle.case_x = randrange(1, 14)
-		
+
 		if tube.structure[tube.case_x][tube.case_y] in ["#", "N", "m", "g"]:
 			tube.case_y = randrange(1, 14)
 			tube.case_x = randrange(1, 14)

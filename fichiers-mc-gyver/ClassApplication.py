@@ -4,6 +4,8 @@
 import decor
 import pygame
 import ClassMaze
+# -tc- Ne pas oublier d'importer ClassMcGyver
+import ClassMcGyver
 
 
 class Application:
@@ -11,23 +13,27 @@ class Application:
 	a class launching the game when opening labyrinth.py
 	"""
 
-	def __init__(self, window, icone, m):
+	# -tc- Je ne vois aucune raison de passer des arguments au init de cette classe
+	def __init__(self, window=None, icone=None, m=None):
 		#initializing application class
 
 		pygame.init()
 		# creating instances from the different classes
 		self.maze = ClassMaze.Maze()
-		self.mc_gyver = ClassMcGyver.McGyver("m", maze)
-		
+		# -tc- passer self.maze à mc_gyver
+		self.mc_gyver = ClassMcGyver.McGyver("m", self.maze)
+
 		#playing theme song looping for ever
-		pygame.mixer.music.load('Mac_Gyver_theme_song.mp3')
+		# -tc- Attention, le fichier s'appelle MacGyver_theme_song.mp3
+		# -tc- et non Mac_Gyver_theme_song.mp3
+		pygame.mixer.music.load('MacGyver_theme_song.mp3')
 		pygame.mixer.music.play(-1, 0.0)
 		self.window = pygame.display.set_mode((600, 600))
 		icon = pygame.image.load(decor.small_icon)
 		pygame.display.set_icon(icon)
 		pygame.display.set_caption("Mc Gyver's Maze")
 		# à voir si besoin de garder ou pas:
-		#self.m = McGyver("images/img_macgyver.png", structure)
+		# self.m = McGyver("images/img_macgyver.png", structure)
 
 
 	def startgame(self):
@@ -70,6 +76,5 @@ class Application:
 def main():
 	app = Application()
 
-
-if "__name__" == "__main__":
+if __name__ == "__main__":
 	main()
