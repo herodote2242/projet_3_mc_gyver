@@ -3,6 +3,6 @@
 
 import ClassApplication
 
-
-application = ClassApplication.Application()
-#application.startgame()
+if __name__ == "__main__":
+	application = ClassApplication.Application()
+	application.startgame()

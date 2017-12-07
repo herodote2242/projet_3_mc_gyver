@@ -3,7 +3,9 @@
 
 import decor
 import pygame
+from pygame.locals import*
 import ClassMaze
+import ClassMcGyver
 
 
 class Application:
@@ -11,17 +13,18 @@ class Application:
 	a class launching the game when opening labyrinth.py
 	"""
 
-	def __init__(self, window, icone, m):
+	def __init__(self):
 		#initializing application class
 
 		pygame.init()
 		# creating instances from the different classes
 		self.maze = ClassMaze.Maze()
-		self.mc_gyver = ClassMcGyver.McGyver("m", maze)
+		self.mc_gyver = ClassMcGyver.McGyver("m", self.maze)
 		
 		#playing theme song looping for ever
-		pygame.mixer.music.load('Mac_Gyver_theme_song.mp3')
+		pygame.mixer.music.load('MacGyver_theme_song.mp3')
 		pygame.mixer.music.play(-1, 0.0)
+		#creating the window
 		self.window = pygame.display.set_mode((600, 600))
 		icon = pygame.image.load(decor.small_icon)
 		pygame.display.set_icon(icon)
@@ -35,18 +38,15 @@ class Application:
 		game_continue = 1
 		while game_continue:
 
-			pygame.time.clock().tick(30)
+			pygame.time.Clock().tick(30)
 
 			for event in pygame.event.get():
 
-				if event.type == QUIT:
-					game_continue = 0
-
 				#possibility of closing the window
-				elif event == KEYDOWN:
+				if event == KEYDOWN:
 
 					if event.key == K_ESCAPE:
-						game = 0
+						game_continue = 0
 
 					#events of mc-gyver's moves
 					elif event.key == K_RIGHT:
@@ -65,3 +65,10 @@ class Application:
 			self.window.blit(fond, (0,0))
 			self.window.blit(self.m(), (case_x, case_y))
 			pygame.display.flip()
+
+# test
+def main():
+	app = Application()
+
+if __name__ == "__main__":
+	main()

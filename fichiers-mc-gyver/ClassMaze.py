@@ -41,3 +41,10 @@ class Maze:
 
 				elif sprite == 'g':
 					window.blit(guardian, (x,y))
+
+#test
+def main():
+	maze = Maze()
+
+if __name__ == "__main__":
+	main()

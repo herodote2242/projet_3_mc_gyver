@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import ClassObject
+import ClassObject as obj
 
-class McGyver(Object):
+class McGyver(obj.Object):
 	"""
 	creation of the class McGyver, allowing to define his position and its movement method
 	"""
@@ -45,3 +45,10 @@ class McGyver(Object):
 			return True
 		else:
 			return False
+
+#test
+def main():
+	mac = McGyver()
+
+if __name__ == "__main__":
+	main()

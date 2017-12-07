@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import ClassMcGyver
-import structure_modifiable
-import ClassObject
+import ClassMcGyver as mac
+import ClassObject as obj
 
-classes.Mc_gyver.case_x = 1
-classes.Mc_gyver.case_y = 1
-classes.Guardian.case_x = 14
-classes.Guardian.case_y = 14
+mac.McGyver.case_x = 1
+mac.McGyver.case_y = 1
+#obj.Guardian.case_x = 14
+#obj.Guardian.case_y = 14
 
 
 """
