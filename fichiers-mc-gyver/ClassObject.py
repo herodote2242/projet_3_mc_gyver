@@ -2,13 +2,8 @@
 # -*- coding: Utf-8 -*
 
 from random import randrange
-import ClassMcGyver as mac
-import ClassObject as obj
-import ClassMaze as maze
-
-
-WALL = '#'
-
+# -tc- effectivement, aucune nécessité d'importer ici. C'était une erreur
+# import ClassObject as obj
 
 class Object:
 	"""
@@ -26,12 +21,14 @@ class Object:
 
 
 if __name__ == "__main__":
+    # -tc- Comme pas d'importation de ClassObject, pas besoin de préfixer par obj.les
+    # -tc- appels à la classe Object
 	maze = maze.Maze()
-	needle = obj.Object('N', maze)
-	tube = obj.Object('T', maze)
-	ether = obj.Object('E', maze)
+	needle = Object('N', maze)
+	tube = Object('T', maze)
+	ether = Object('E', maze)
 	Mc_gyver = mac.McGyver('m', maze)
-	Guardian = obj.Object('g', maze)
+	Guardian = Object('g', maze)
 	syringe = [needle, ether, tube]
 
 	#for item in syringe:

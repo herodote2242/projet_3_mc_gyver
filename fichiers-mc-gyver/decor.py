@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
+# -tc- Le code que je commente ci-dessous est inutile dans decor.py
+# import ClassMcGyver as mac
+# import ClassObject as obj
 
-import ClassMcGyver as mac
-import ClassObject as obj
-
-mac.McGyver.case_x = 1
-mac.McGyver.case_y = 1
-#obj.Guardian.case_x = 14
-#obj.Guardian.case_y = 14
+# mac.McGyver.case_x = 1
+# mac.McGyver.case_y = 1
+# obj.Guardian.case_x = 14
+# obj.Guardian.case_y = 14
 
 
 """

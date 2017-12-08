@@ -2,15 +2,18 @@
 # -*- coding: Utf-8 -*
 
 import ClassObject as obj
+import ClassMaze as maze
 
 class McGyver(obj.Object):
 	"""
 	creation of the class McGyver, allowing to define his position and its movement method
 	"""
 
-	def __init__(self, display, structure):
+	# -tc- je me demande si l'argument display est vraiment utile ici, vu qu'on
+	# -tc- sais que c'est 'm'
+	def __init__(self, structure):
 		# Mac Gyver's position
-		super().__init__(display, structure)
+		super().__init__(structure, 'm')
 		self.case_x = 1
 		self.case_y = 1
 		self.object_number = 0
@@ -24,7 +27,13 @@ class McGyver(obj.Object):
 
 	def move(self, direction):
 		# defining the different movements
+
+		# -tc- on pourrait crée une méthode is_wall dans Maze pour ne pas
+		# -tc- avoir à écrire ce test 4 fois
+		# -tc- Sinon, il ne faut pas oublier de définir WALL quelque part:
+		WALL = '#'
 		if direction == 'right':
+
 			if self.structure[self.case_y][self.case_x+1] != WALL:
 				self.case_x += 1
 
@@ -46,9 +55,10 @@ class McGyver(obj.Object):
 		else:
 			return False
 
-#test
+# -tc- On définit notre code de test dans main()
 def main():
-	mac = McGyver()
+	structure = maze.Maze()
+	mac = McGyver(structure)
 
 if __name__ == "__main__":
 	main()
