@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
-
-import pygame
+# -tc- D'abord les imports de la bibliothèque standard
 import json
+# -tc- Ensuite les bibliothèques tièrces
+import pygame
+# -tc- Finalement nos propres imports
+import decor
 
 
 class Maze:
@@ -15,17 +18,21 @@ class Maze:
 		sprites are displayed according to blanks or # in structure_modifiable.py
 		"""
 		with open('structure_modifiable.json', 'r') as f:
-			self.data = json.load(f)
+			# -tc- renommer data et structure, puisque par la suite tu fais référence
+			# -tc- à structure
+			self.structure = json.load(f)
 
 
 	def display(self, window):
 		"""
 		method allowing the construction of the graphic maze with images
 		"""
-		wall = deco.pygame.image.load(image_wall).convert()
-		path = decor.pygame.image.load(image_path).convert()
-		guardian = decor.pygame.image.load(image_guardian).convert_alpha()
-		macgyver = decor.pygame.image.load(image_macgyver).convert_alpha()
+        # -tc- correction de typo: deco -> decor
+		# -tc- par ailleurs, les decor préfixent les images
+		wall = pygame.image.load(decor.image_wall).convert()
+		path = pygame.image.load(decor.image_path).convert()
+		guardian = pygame.image.load(decor.image_guardian).convert_alpha()
+		macgyver = pygame.image.load(decor.image_macgyver).convert_alpha()
 
 		for line_number, line in enumerate(self.structure):
 
@@ -42,9 +49,30 @@ class Maze:
 				elif sprite == 'g':
 					window.blit(guardian, (x,y))
 
-#test
+				# -tc- Ajout d'une condition pour McGyver
+				elif sprite == 'm':
+					window.blit(macgyver, (x, y))
+
+
+
+# -tc- Ici, on va tester si notre si le labyrinthe se charge
 def main():
+	pygame.init()
+	window = pygame.display.set_mode((600, 600))
+	#playing theme song looping for ever
+	pygame.mixer.music.load('MacGyver_theme_song.mp3')
+	pygame.mixer.music.play(-1, 0.0)
 	maze = Maze()
+	maze.display(window)
+	pygame.display.flip()
+	
+	end = False
+	while not end:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				end = True
+	pygame.quit()
+
 
 if __name__ == "__main__":
 	main()
