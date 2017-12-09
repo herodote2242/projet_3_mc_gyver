@@ -3,9 +3,9 @@
 
 import decor
 import pygame
-from pygame.locals import*
 import ClassMaze
 import ClassMcGyver
+
 
 
 class Application:
@@ -13,7 +13,7 @@ class Application:
 	a class launching the game when opening labyrinth.py
 	"""
 
-	def __init__(self):
+	def __init__(self, window=None, icone=None, m=None):
 		#initializing application class
 
 		pygame.init()
@@ -24,6 +24,7 @@ class Application:
 		#playing theme song looping for ever
 		pygame.mixer.music.load('MacGyver_theme_song.mp3')
 		pygame.mixer.music.play(-1, 0.0)
+
 		#creating the window
 		self.window = pygame.display.set_mode((600, 600))
 		icon = pygame.image.load(decor.small_icon)
@@ -38,12 +39,15 @@ class Application:
 		game_continue = 1
 		while game_continue:
 
-			pygame.time.Clock().tick(30)
+			pygame.time.clock().tick(30)
 
 			for event in pygame.event.get():
 
 				#possibility of closing the window
-				if event == KEYDOWN:
+				if event.type == QUIT:
+					game_continue = 0
+
+				elif event == KEYDOWN:
 
 					if event.key == K_ESCAPE:
 						game_continue = 0
@@ -62,7 +66,8 @@ class Application:
 						self.m('down')
 
 			#refreshing the window
-			self.window.blit(fond, (0,0))
+			#à voir si nécessaire car pas de fond initialisé en 0,0
+			#self.window.blit(fond, (0,0))
 			self.window.blit(self.m(), (case_x, case_y))
 			pygame.display.flip()
 

@@ -2,15 +2,16 @@
 # -*- coding: Utf-8 -*
 
 import ClassObject as obj
+import ClassMaze as maze
 
 class McGyver(obj.Object):
 	"""
 	creation of the class McGyver, allowing to define his position and its movement method
 	"""
 
-	def __init__(self, display, structure):
+	def __init__(self, structure):
 		# Mac Gyver's position
-		super().__init__(display, structure)
+		super().__init__(structure, 'm')
 		self.case_x = 1
 		self.case_y = 1
 		self.object_number = 0
@@ -23,6 +24,9 @@ class McGyver(obj.Object):
 
 
 	def move(self, direction):
+
+		WALL = '#'
+
 		# defining the different movements
 		if direction == 'right':
 			if self.structure[self.case_y][self.case_x+1] != WALL:
@@ -48,7 +52,8 @@ class McGyver(obj.Object):
 
 #test
 def main():
-	mac = McGyver()
+	structure = maze.Maze()
+	mac = McGyver(structure)
 
 if __name__ == "__main__":
 	main()

@@ -2,12 +2,6 @@
 # -*- coding: Utf-8 -*
 
 from random import randrange
-import ClassMcGyver as mac
-import ClassObject as obj
-import ClassMaze as maze
-
-
-WALL = '#'
 
 
 class Object:
@@ -24,15 +18,6 @@ class Object:
 		self.case_x = 0
 		self.case_y = 0
 
-
-if __name__ == "__main__":
-	maze = maze.Maze()
-	needle = obj.Object('N', maze)
-	tube = obj.Object('T', maze)
-	ether = obj.Object('E', maze)
-	Mc_gyver = mac.McGyver('m', maze)
-	Guardian = obj.Object('g', maze)
-	syringe = [needle, ether, tube]
 
 	#for item in syringe:
 		#technique d'implémentation aléatoire à revoir
@@ -55,9 +40,22 @@ if __name__ == "__main__":
 
 		#item.display()
 
-#test
+#testing if class working correctly
 def main():
-	obj = Object()
+
+	import ClassMaze as maze
+	import ClassObject as obj
+
+	structure = maze.Maze()
+	needle = obj.Object(structure, 'N')
+	tube = obj.Object(structure, 'T')
+	ether = obj.Object(structure, 'E')
+
+	print('Needle:', needle.display)
+	print('Tube:', tube.display)
+	print('Ether', ether.display)
+	
+
 
 if __name__ == "__main__":
 	main()

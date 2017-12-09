@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import ClassMcGyver as mac
-import ClassObject as obj
-
-mac.McGyver.case_x = 1
-mac.McGyver.case_y = 1
-#obj.Guardian.case_x = 14
-#obj.Guardian.case_y = 14
-
 
 """
 defining the different element's of the window
