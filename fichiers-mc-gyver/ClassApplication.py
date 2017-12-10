@@ -19,6 +19,8 @@ class Application:
 		pygame.init()
 		# creating instances from the different classes
 		self.maze = ClassMaze.Maze()
+		# -tc- Il y a un argument de trop par rapport à ce que définit le constructeur
+		# -tc- de ta classe McGyver. A toi de définir lequel
 		self.mc_gyver = ClassMcGyver.McGyver("m", self.maze)
 		
 		#playing theme song looping for ever
