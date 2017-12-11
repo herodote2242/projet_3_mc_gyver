@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import decor
+# grâce à différentes sources (coding with pygame, un autre labyringht sur internet)
+# j'ai remarqué que sans les lignes d'import de sys et de pygame.locals, il y avait des erreurs 
+# à partir de la ligne 53 sur les éléments QUIT, KEY_DOWN, KEY_ESCAPE, etc...
+# quid également de l'utilité des lignes 54 à 57
+import sys
 import pygame
+from pygame.locals import *
 import ClassMaze
 import ClassMcGyver
+import ClassObject
+import decor
 
 
 
@@ -13,13 +20,13 @@ class Application:
 	a class launching the game when opening labyrinth.py
 	"""
 
-	def __init__(self, window=None, icone=None, m=None):
+	def __init__(self, window=None, icon=None, m=None):
 		#initializing application class
 
 		pygame.init()
 		# creating instances from the different classes
 		self.maze = ClassMaze.Maze()
-		self.mc_gyver = ClassMcGyver.McGyver("m", self.maze)
+		self.mc_gyver = ClassMcGyver.McGyver('m')
 		
 		#playing theme song looping for ever
 		pygame.mixer.music.load('MacGyver_theme_song.mp3')
@@ -27,8 +34,8 @@ class Application:
 
 		#creating the window
 		self.window = pygame.display.set_mode((600, 600))
-		icon = pygame.image.load(decor.small_icon)
-		pygame.display.set_icon(icon)
+		self.icon = pygame.image.load(decor.small_icon)
+		pygame.display.set_icon(self.icon)
 		pygame.display.set_caption("Mc Gyver's Maze")
 		# à voir si besoin de garder ou pas:
 		#self.m = McGyver("images/img_macgyver.png", structure)
@@ -36,19 +43,22 @@ class Application:
 
 	def startgame(self):
 		#game loop
+		pygame.init()
 		game_continue = 1
 		while game_continue:
 
-			pygame.time.clock().tick(30)
+			pygame.time.Clock().tick(30)
 
 			for event in pygame.event.get():
 
-				#possibility of closing the window
+				# a vérifier le bien fondé de ces 3 lignes
 				if event.type == QUIT:
-					game_continue = 0
+					pygame.quit()
+					sys.quit()
 
 				elif event == KEYDOWN:
 
+					#possibility of closing the window
 					if event.key == K_ESCAPE:
 						game_continue = 0
 
@@ -64,11 +74,12 @@ class Application:
 
 					elif event.key == K_DOWN:
 						self.m('down')
+			pygame.display.update()
 
 			#refreshing the window
 			#à voir si nécessaire car pas de fond initialisé en 0,0
 			#self.window.blit(fond, (0,0))
-			self.window.blit(self.m(), (case_x, case_y))
+			self.window.blit(self.window, (self.mc_gyver.case_x, self.mc_gyver.case_y))
 			pygame.display.flip()
 
 # test
