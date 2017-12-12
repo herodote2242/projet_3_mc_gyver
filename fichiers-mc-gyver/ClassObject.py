@@ -9,12 +9,12 @@ class Object:
 	creation of the class Objects, allowing random creation on the maze
 	"""
 
-	def __init__(self, structure, display):
+	def __init__(self, maze, display):
 		"""
 		initializing the objects representation
 		"""
 		self.display = display
-		self.structure = structure
+		self.structure = maze.structure
 		self.case_x = 0
 		self.case_y = 0
 

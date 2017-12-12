@@ -41,9 +41,11 @@ class Maze:
 					window.blit(path, (x,y))
 
 				elif sprite == 'g':
+					window.blit(path, (x,y))
 					window.blit(guardian, (x,y))
 
 				elif sprite == "m":
+					window.blit(path, (x,y))
 					window.blit(macgyver, (x,y))
 
 #testing if the maze is correctly loading

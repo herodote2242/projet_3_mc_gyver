@@ -26,11 +26,11 @@ class Application:
 		pygame.init()
 		# creating instances from the different classes
 		self.maze = ClassMaze.Maze()
-		self.mc_gyver = ClassMcGyver.McGyver('m')
+		self.mc_gyver = ClassMcGyver.McGyver(self.maze)
 		
 		#playing theme song looping for ever
-		pygame.mixer.music.load('MacGyver_theme_song.mp3')
-		pygame.mixer.music.play(-1, 0.0)
+		# pygame.mixer.music.load('MacGyver_theme_song.mp3')
+		# pygame.mixer.music.play(-1, 0.0)
 
 		#creating the window
 		self.window = pygame.display.set_mode((600, 600))
@@ -39,48 +39,51 @@ class Application:
 		pygame.display.set_caption("Mc Gyver's Maze")
 		# à voir si besoin de garder ou pas:
 		#self.m = McGyver("images/img_macgyver.png", structure)
+		pygame.display.flip()
 
 
 	def startgame(self):
 		#game loop
-		pygame.init()
-		game_continue = 1
+		game_continue = True
 		while game_continue:
 
 			pygame.time.Clock().tick(30)
+			pygame.event.pump()
+			# A key has been pressed
 
 			for event in pygame.event.get():
-
 				# a vérifier le bien fondé de ces 3 lignes
 				if event.type == QUIT:
-					pygame.quit()
-					sys.quit()
+					game_continue = False
 
-				elif event == KEYDOWN:
-
+				elif event.type == KEYDOWN:
 					#possibility of closing the window
 					if event.key == K_ESCAPE:
-						game_continue = 0
+						game_continue = False
 
 					#events of mc-gyver's moves
 					elif event.key == K_RIGHT:
-						self.m('right')
+						self.mc_gyver.move('right')
 
 					elif event.key == K_LEFT:
-						self.m('left')
+						self.mc_gyver.move('left')
 
 					elif event.key == K_UP:
-						self.m('up')
+						self.mc_gyver.move('up')
 
 					elif event.key == K_DOWN:
-						self.m('down')
-			pygame.display.update()
+						self.mc_gyver.move('down')
+			#pygame.display.update()
 
 			#refreshing the window
 			#à voir si nécessaire car pas de fond initialisé en 0,0
 			#self.window.blit(fond, (0,0))
-			self.window.blit(self.window, (self.mc_gyver.case_x, self.mc_gyver.case_y))
-			pygame.display.flip()
+			#self.window.blit(self.window, (self.mc_gyver.case_x, self.mc_gyver.case_y))
+			if game_continue:
+				self.maze.display(self.window)
+				pygame.display.flip()
+
+		pygame.quit()
 
 # test
 def main():
