@@ -41,15 +41,17 @@ class Maze:
 					window.blit(path, (x,y))
 
 				elif sprite == 'g':
+					window.blit(path, (x,y))
 					window.blit(guardian, (x,y))
 
 				elif sprite == "m":
+					window.blit(path, (x,y))
 					window.blit(macgyver, (x,y))
 
 #testing if the maze is correctly loading
 def main():
 	pygame.init()
-	window = pygame.display.set_mode((600, 600))
+	window = pygame.display.set_mode((600, 600), RESIZABLE)
 	#playing theme song looping for ever
 	pygame.mixer.music.load('MacGyver_theme_song.mp3')
 	pygame.mixer.music.play(-1, 0.0)
