@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-# grâce à différentes sources (coding with pygame, un autre labyringht sur internet)
-# j'ai remarqué que sans les lignes d'import de sys et de pygame.locals, il y avait des erreurs 
-# à partir de la ligne 53 sur les éléments QUIT, KEY_DOWN, KEY_ESCAPE, etc...
-# quid également de l'utilité des lignes 54 à 57
+
 import sys
 import pygame
 from pygame.locals import *
@@ -33,12 +30,10 @@ class Application:
 		pygame.mixer.music.play(-1, 0.0)
 
 		#creating the window
-		self.window = pygame.display.set_mode((600, 600))
+		self.window = pygame.display.set_mode((600, 600), RESIZABLE)
 		self.icon = pygame.image.load(decor.small_icon)
 		pygame.display.set_icon(self.icon)
 		pygame.display.set_caption("Mc Gyver's Maze")
-		# à voir si besoin de garder ou pas:
-		#self.m = McGyver("images/img_macgyver.png", structure)
 
 
 	def startgame(self):
@@ -76,7 +71,6 @@ class Application:
 						self.mc_gyver.move('down')
 
 			#refreshing the window
-			#self.window.blit(self.window, (self.mc_gyver.case_x, self.mc_gyver.case_y))
 			if game_continue:
 				self.maze.display(self.window)
 				pygame.display.flip()

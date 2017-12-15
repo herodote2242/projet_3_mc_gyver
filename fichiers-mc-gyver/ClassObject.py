@@ -2,6 +2,7 @@
 # -*- coding: Utf-8 -*
 
 from random import randrange
+import ClassMaze
 
 
 class Object:
@@ -10,9 +11,7 @@ class Object:
 	"""
 
 	def __init__(self, maze, display):
-		"""
-		initializing the objects representation
-		"""
+		#initializing the objects representation
 		self.display = display
 		self.structure = maze.structure
 		self.case_x = 0
@@ -54,7 +53,7 @@ def main():
 	print('Needle:', needle.display)
 	print('Tube:', tube.display)
 	print('Ether', ether.display)
-	
+	list_free_sprites()
 
 
 if __name__ == "__main__":

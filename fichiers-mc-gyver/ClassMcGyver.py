@@ -30,41 +30,46 @@ class McGyver(obj.Object):
 
 		# defining the different moves
 		if direction == 'right':
-			if self.structure[self.case_x][self.case_y+1] != WALL:
-				#previous position turns back to a path
-				self.structure[self.case_x][self.case_y] = ' '
-				self.case_y += 1
-				#new position turns into mc-gyver's icon
-				self.structure[self.case_x][self.case_y] = self.display
+			if self.case_y < 14:
+				if self.structure[self.case_x][self.case_y+1] != WALL:
+					#previous position turns back to a path
+					self.structure[self.case_x][self.case_y] = ' '
+					self.case_y += 1
+					#new position turns into mc-gyver's icon
+					self.structure[self.case_x][self.case_y] = self.display
 
 		elif direction == 'left':
-			if self.structure[self.case_x][self.case_y-1] != WALL:
-				#previous position turns back to a path
-				self.structure[self.case_x][self.case_y] = ' '
-				self.case_y -= 1
-				#new position turns into mc-gyver's icon
-				self.structure[self.case_x][self.case_y] = self.display
+			if self.case_y > 0:	
+				if self.structure[self.case_x][self.case_y-1] != WALL:
+					#previous position turns back to a path
+					self.structure[self.case_x][self.case_y] = ' '
+					self.case_y -= 1
+					#new position turns into mc-gyver's icon
+					self.structure[self.case_x][self.case_y] = self.display
 
 
 		elif direction == 'up':
-			if self.structure[self.case_x-1][self.case_y] != WALL:
-				#previous position turns back to a path
-				self.structure[self.case_x][self.case_y] = ' '
-				self.case_x -= 1
-				#new position turns into mc-gyver's icon
-				self.structure[self.case_x][self.case_y] = self.display
+			if self.case_x > 0:
+				if self.structure[self.case_x-1][self.case_y] != WALL:
+					#previous position turns back to a path
+					self.structure[self.case_x][self.case_y] = ' '
+					self.case_x -= 1
+					#new position turns into mc-gyver's icon
+					self.structure[self.case_x][self.case_y] = self.display
 
 
 		elif direction == 'down':
-			if self.structure[self.case_x+1][self.case_y] != WALL:
-				#previous position turns back to a path
-				self.structure[self.case_x][self.case_y] = ' '
-				self.case_x += 1
-				#new position turns into mc-gyver's icon
-				self.structure[self.case_x][self.case_y] = self.display
+			if self.case_x < 14:
+				if self.structure[self.case_x+1][self.case_y] != WALL:
+					#previous position turns back to a path
+					self.structure[self.case_x][self.case_y] = ' '
+					self.case_x += 1
+					#new position turns into mc-gyver's icon
+					self.structure[self.case_x][self.case_y] = self.display
 
 
 		# verification of the presence of the guardian
+		#à compléter avec les conditions de victoire quand objets implantés
 		if self.structure[self.case_x][self.case_y] == "g":
 			return True
 		else:
