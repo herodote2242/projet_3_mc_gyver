@@ -3,7 +3,6 @@
 
 import json
 import pygame
-import random
 import decor
 
 
@@ -28,8 +27,6 @@ class Maze:
 		tube = pygame.image.load(decor.image_tube).convert_alpha()
 		ether = pygame.image.load(decor.image_ether).convert_alpha()
 		needle = pygame.image.load(decor.image_needle).convert_alpha()
-		syringe = [tube, needle, ether]
-		free_sprites = []
 
 		for line_number, line in enumerate(self.structure):
 
@@ -55,12 +52,7 @@ class Maze:
 					window.blit(path, (x,y))
 					window.blit(exit, (x,y))
 
-				elif sprite == ' ':
-					free_sprites.append([x,y])
-					for item in syringe:
-						random.choice(free_sprites)
-
-
+				
 
 #testing if the maze is correctly loading
 def main():
