@@ -29,33 +29,26 @@ class Syringe(Object):
 	
 	def __init__(self, maze, display):
 		#initializing the syringe objects representation
-		super().__init__(maze, syringe)
-		self.display = display
-		self.structure = maze.structure
-		syringe = [tube, needle, ether]	
-
+		super().__init__(maze, display)
+		self.syringe = list(self.display)
 	
 	def list_free_sprites():
 		# function listing all the free sprites on the maze
-		free_sprites = []
-
-		with open('structure_modifiable.json', 'r') as f:
-			self.structure = json.load(f)
-
-			for line_number, line in enumerate(self.structure):
-				for case_number, sprite in enumerate(line):
-					x = case_number * decor.sprite_dimension
-					y = line_number * decor.sprite_dimension
-					if sprite == ' ':
-						free_sprites.append([x,y])
+		self.free_sprites = []
+		for line_number, line in enumerate(self.structure):
+			for case_number, sprite in enumerate(line):
+				if sprite == ' ':
+					self.free_sprites.append([line_number, case_number])
 
 	
-	def choose_free_sprite():
+	def choose_free_sprites():
 		#function randomly choosing a sprite for the syringe objects
+		positions = random.sample(self.free_sprites, len(self.syringe))
 
-		for item in syringe:
-			random.choice(free_sprites)
-			item.maze.display()
+		for position, item in zip(positions, self.syringe):
+			line_number, case_numer = position
+			# Position the item in self.structure
+			self.structure[line_number][case_number] = item
 
 	#for item in syringe:
 		#technique d'implémentation aléatoire à revoir

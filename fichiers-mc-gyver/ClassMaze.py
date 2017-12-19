@@ -48,6 +48,13 @@ class Maze:
 					window.blit(path, (x,y))
 					window.blit(macgyver, (x,y))
 
+				# -tc- positioning of the tube
+				elif sprite == "T":
+					window.blit(path, (x,y))
+					window.blit(tube, (x,y))
+
+				# -tc- now, you can position the needle and the ether
+
 				elif sprite == "e":
 					window.blit(path, (x,y))
 					window.blit(exit, (x,y))

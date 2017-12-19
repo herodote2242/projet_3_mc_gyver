@@ -24,6 +24,10 @@ class Application:
 		# creating instances from the different classes
 		self.maze = ClassMaze.Maze()
 		self.mc_gyver = ClassMcGyver.McGyver(self.maze)
+        # -tc- create syringe
+        self.syringe = Syringe(self.maze, 'TNE')
+        self.syringe.list_free_sprites()
+        self.syringe.choose_free_sprites()
 		
 		#playing theme song looping for ever
 		pygame.mixer.music.load('MacGyver_theme_song.mp3')
