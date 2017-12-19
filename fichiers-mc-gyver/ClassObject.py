@@ -55,7 +55,7 @@ class Syringe(Object):
 
 		for item in syringe:
 			random.choice(free_sprites)
-		item.display()
+			item.maze.display()
 
 	#for item in syringe:
 		#technique d'implémentation aléatoire à revoir
