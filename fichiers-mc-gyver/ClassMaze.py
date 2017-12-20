@@ -12,7 +12,7 @@ class Maze:
 	"""
 
 	def __init__(self):
-		#sprites are displayed according to blanks or # in structure_modifiable.json
+		#sprites are displayed according to blanks, e, g, m, or # in structure_modifiable.json
 		with open('structure_modifiable.json', 'r') as f:
 			self.structure = json.load(f)
 
@@ -47,6 +47,18 @@ class Maze:
 				elif sprite == "m":
 					window.blit(path, (x,y))
 					window.blit(macgyver, (x,y))
+
+				elif sprite == "T":
+					window.blit(path, (x,y))
+					window.blit(tube, (x,y))
+
+				elif sprite == "N":
+					window.blit(path, (x,y))
+					window.blit(needle, (x,y))
+
+				elif sprite == "E":
+					window.blit(path, (x,y))
+					window.blit(ether, (x,y))
 
 				elif sprite == "e":
 					window.blit(path, (x,y))
