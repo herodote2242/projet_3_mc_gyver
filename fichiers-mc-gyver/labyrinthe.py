@@ -4,5 +4,5 @@
 import ClassApplication
 
 if __name__ == "__main__":
-	application = ClassApplication.Application()
-	application.startgame()
+    application = ClassApplication.Application()
+    application.startgame()
