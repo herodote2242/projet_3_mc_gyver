@@ -81,7 +81,7 @@ class Application:
                 self.maze.display(self.window)
                 pygame.display.flip()
 
-        endgame(self.mc_gyver)
+        ClassMcGyver.endgame()
         pygame.quit()
 
 

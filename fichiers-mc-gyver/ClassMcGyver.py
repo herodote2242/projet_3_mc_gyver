@@ -68,13 +68,13 @@ class McGyver(obj.Object):
                     self.structure[self.case_x][self.case_y] = self.display
 
 
-    def endgame():
+    def endgame(self):
         #condition of victory or defeat
         if self.structure[self.case_x][self.case_y] == [13][14]:
             #victory
             if self.object_number == 3:
                 #guardian turns into a blood splatter
-                self.structure[14][14] == "l"
+                maze.guardian = pygame.image.load(decor.image_youloose).convert_alpha()
                 #Mc Gyver reaches the exit
                 if self.structure[self.case_x][self.case_y] == [15][14]:
                     game_continue = False
@@ -82,7 +82,7 @@ class McGyver(obj.Object):
             #defeat
             elif self.object_number != 3:
                 #Mc Gyver turns into a blood splatter
-                self.structure[self.case_x][self.case_y] = "l"
+                maze.mcgyver = pygame.image.load(decor.image_youloose).convert_alpha()
                 game_continue = False
 
 #test

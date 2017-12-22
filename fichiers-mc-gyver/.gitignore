@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+test.py
+zip/
+scenario.txt
+livrable_projet3.odt
+livrable_projet3.doc
