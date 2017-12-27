@@ -5,9 +5,14 @@
 import sys
 import pygame
 from pygame.locals import *
+# -tc- PEP8 recommande des noms de modules tout en minuscules.
+# -tc- Je propose: application, maze, mcgyver, item (avec renommage de la classe Object en Item, car object
+# -tc- est un mot réservé en python)
+# -tc- Je propose également de mettre la classe Syringe dans un module syringe.py dédié.
 import ClassMaze
 import ClassMcGyver
 import ClassObject
+# -tc- je me demande si renommer le module decor en config ne serait pas opportun
 import decor
 
 
@@ -22,6 +27,11 @@ class Application:
 
         pygame.init()
         #creating instances from the different classes
+        # -tc- Avec la proposition de renommage de ClassMaze en maze, les 
+        # -tc- lignes ci-dessous deviendraient:
+        # -tc-     self.maze = maze.Maze()
+        # -tc-     self.my_gyver = mcgyver.McGyver(self.maze)
+        # -tc-     self.syringe = syringe.Syringe(self.maze, ['T', 'N', 'E'])
         self.maze = ClassMaze.Maze()
         self.mc_gyver = ClassMcGyver.McGyver(self.maze)
         

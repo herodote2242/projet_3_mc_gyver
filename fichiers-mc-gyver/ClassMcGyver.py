@@ -5,6 +5,12 @@ import ClassObject as obj
 import ClassMaze as maze
 import decor
 
+# -tc- McGyver est la seule classe à hériter de Object, on peut se demander si il
+# -tc- n'est pas préférable d'éliminer cette classe et d'introduire le attributs
+# -tc- self.structure, self.display, self.case_x et self.case_y directement dans
+# -tc- McGyver. 
+# -tc- Si on décide de la garder, il serait mieux de renommer en Item et de la placer
+# -tc- dans le module item.py (pour respecter les recommandations du PEP8)
 class McGyver(obj.Object):
     """
     creation of the class McGyver, allowing to define his position and its movement method
@@ -24,6 +30,7 @@ class McGyver(obj.Object):
             self.object_number += 1
 
 
+    # -tc- Je pense qu'on peut facoriser le code de cette méthode, très répétitif
     def move(self, direction):
 
         WALL = '#'

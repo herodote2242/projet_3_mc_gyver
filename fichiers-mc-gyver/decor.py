@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+# -tc- je propose de renommer ce module en config pour plus de clareté
 
 """
 defining the different element's of the window
