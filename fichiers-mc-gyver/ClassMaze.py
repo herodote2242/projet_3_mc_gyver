@@ -27,7 +27,6 @@ class Maze:
         tube = pygame.image.load(decor.image_tube).convert_alpha()
         ether = pygame.image.load(decor.image_ether).convert_alpha()
         needle = pygame.image.load(decor.image_needle).convert_alpha()
-        blood = pygame.image.load(decor.image_youloose).convert_alpha()
 
         for line_number, line in enumerate(self.structure):
 

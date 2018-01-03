@@ -44,8 +44,7 @@ class Application:
 
     def startgame(self):
         #game loop
-        game_continue = True
-        while game_continue:
+        while not self.mc_gyver.endgame():
 
             pygame.time.Clock().tick(30)
             # a key has been pressed
@@ -55,13 +54,13 @@ class Application:
             for event in pygame.event.get():
 
                 if event.type == QUIT:
-                    game_continue = False
+                    pygame.quit()
 
                 elif event.type == KEYDOWN:
 
                     #possibility of closing the window
                     if event.key == K_ESCAPE:
-                        game_continue = False
+                        pygame.quit()
 
                     #events of mc-gyver's moves
                     elif event.key == K_RIGHT:
@@ -76,13 +75,12 @@ class Application:
                     elif event.key == K_DOWN:
                         self.mc_gyver.move('down')
 
-            #refreshing the window
-            if game_continue:
+                #refreshing the window
                 self.maze.display(self.window)
                 pygame.display.flip()
 
-        ClassMcGyver.endgame()
-        pygame.quit()
+        else:
+            self.mc_gyver.endgame()
 
 
 # test

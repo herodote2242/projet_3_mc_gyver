@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+import pygame
+from pygame.locals import *
 import ClassObject as obj
 import ClassMaze as maze
+import ClassApplication
 import decor
 
 class McGyver(obj.Object):
@@ -18,7 +21,7 @@ class McGyver(obj.Object):
         self.object_number = 0
 
 
-    def increment_object_number():
+    def increment_object_number(self):
         # function to count the number of picked up objects
         if [self.case_x][self.case_y] in ClassObject.positions:
             self.object_number += 1
@@ -70,21 +73,50 @@ class McGyver(obj.Object):
 
     def endgame(self):
         #condition of victory or defeat
-        if self.structure[self.case_x][self.case_y] == [13][14]:
+        if (self.case_x, self.case_y) == "e":
             #victory
             if self.object_number == 3:
                 #guardian turns into a blood splatter
                 maze.guardian = pygame.image.load(decor.image_youloose).convert_alpha()
-                #Mc Gyver reaches the exit
-                if self.structure[self.case_x][self.case_y] == [15][14]:
-                    game_continue = False
+                #informing the player of the success, and if he wants to play again
+                victory = pygame.image.load(decor.img_gamewon).convert()
+                window.blit(victory, (150,200))
+                for event in pygame.event.get():
+
+                    if event.type == QUIT:
+                        pygame.quit()
+
+                    elif event.type == KEYDOWN:
+
+                        #possibility of closing the window
+                        if event.key == K_ESCAPE:
+                            pygame.quit()
+
+                        #or playing again
+                        elif event.key == K_ENTER:
+                            ClassApplication.Application()
 
             #defeat
-            elif self.object_number != 3:
+            else:
                 #Mc Gyver turns into a blood splatter
                 maze.mcgyver = pygame.image.load(decor.image_youloose).convert_alpha()
-                game_continue = False
+                #too bad for the player, he lost but can try again
+                defeat = pygame.image.load(decor.img_gameover).convert()
+                window.blit(defeat, (150, 200))
+                for event in pygame.event.get():
 
+                    if event.type == QUIT:
+                        pygame.quit()
+
+                    elif event.type == KEYDOWN:
+
+                        #possibility of closing the window
+                        if event.key == K_ESCAPE:
+                            pygame.quit()
+
+                        #or playing again
+                        elif event.key == K_ENTER:
+                            ClassApplication.Application()
 #test
 def main():
     structure = maze.Maze()
