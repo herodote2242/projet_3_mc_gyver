@@ -3,27 +3,30 @@
 
 import pygame
 from pygame.locals import *
-import ClassObject as obj
-import ClassMaze as maze
-import ClassApplication
-import decor
+import item
+import maze
+import application
+import config
 
-class McGyver(obj.Object):
+class McGyver:
     """
     creation of the class McGyver, allowing to define his position and its movement method
     """
 
-    def __init__(self, maze):
+    def __init__(self, maze, display = 'm'):
         # Mac Gyver's position
-        super().__init__(maze, 'm')
+        self.display = display
+        self.structure = maze.structure
+        self.maze = maze
+        #super().__init__(maze, 'm')
         self.case_x = 1
         self.case_y = 1
-        self.object_number = 0
+        #self.object_number = 0
 
 
     def increment_object_number(self):
         # function to count the number of picked up objects
-        if [self.case_x][self.case_y] in ClassObject.positions:
+        if [self.case_x][self.case_y] in item.positions:
             self.object_number += 1
 
 
@@ -77,9 +80,9 @@ class McGyver(obj.Object):
             #victory
             if self.object_number == 3:
                 #guardian turns into a blood splatter
-                maze.guardian = pygame.image.load(decor.image_youloose).convert_alpha()
+                self.maze.guardian = pygame.image.load(config.image_youloose).convert_alpha()
                 #informing the player of the success, and if he wants to play again
-                victory = pygame.image.load(decor.img_gamewon).convert()
+                victory = pygame.image.load(config.img_gamewon).convert()
                 window.blit(victory, (150,200))
                 for event in pygame.event.get():
 
@@ -94,14 +97,14 @@ class McGyver(obj.Object):
 
                         #or playing again
                         elif event.key == K_ENTER:
-                            ClassApplication.Application()
+                            application.Application()
 
             #defeat
             else:
                 #Mc Gyver turns into a blood splatter
-                maze.mcgyver = pygame.image.load(decor.image_youloose).convert_alpha()
+                self.maze.mcgyver = pygame.image.load(config.image_youloose).convert_alpha()
                 #too bad for the player, he lost but can try again
-                defeat = pygame.image.load(decor.img_gameover).convert()
+                defeat = pygame.image.load(config.img_gameover).convert()
                 window.blit(defeat, (150, 200))
                 for event in pygame.event.get():
 
@@ -116,7 +119,7 @@ class McGyver(obj.Object):
 
                         #or playing again
                         elif event.key == K_ENTER:
-                            ClassApplication.Application()
+                            application.Application()
 #test
 def main():
     structure = maze.Maze()

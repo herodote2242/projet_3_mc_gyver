@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
-import ClassApplication
+import application
 
 if __name__ == "__main__":
-    application = ClassApplication.Application()
+    application = application.Application()
     application.startgame()

@@ -5,10 +5,10 @@
 import sys
 import pygame
 from pygame.locals import *
-import ClassMaze
-import ClassMcGyver
-import ClassObject
-import decor
+import maze
+import mcgyver
+import item
+import config
 
 
 
@@ -22,11 +22,11 @@ class Application:
 
         pygame.init()
         #creating instances from the different classes
-        self.maze = ClassMaze.Maze()
-        self.mc_gyver = ClassMcGyver.McGyver(self.maze)
+        self.maze = maze.Maze()
+        self.mc_gyver = mcgyver.McGyver(self.maze)
         
         #creating syringe
-        self.syringe = ClassObject.Syringe(self.maze, 'TNE')
+        self.syringe = item.Syringe(self.maze, 'TNE')
         self.syringe.list_free_sprites()
         self.syringe.choose_free_sprites()
 
@@ -37,7 +37,7 @@ class Application:
 
         #creating the window
         self.window = pygame.display.set_mode((600, 600), RESIZABLE)
-        self.icon = pygame.image.load(decor.small_icon)
+        self.icon = pygame.image.load(config.small_icon)
         pygame.display.set_icon(self.icon)
         pygame.display.set_caption("Mc Gyver's Maze")
 
@@ -55,12 +55,14 @@ class Application:
 
                 if event.type == QUIT:
                     pygame.quit()
+                    sys.quit()
 
                 elif event.type == KEYDOWN:
 
                     #possibility of closing the window
                     if event.key == K_ESCAPE:
                         pygame.quit()
+                        sys.quit()
 
                     #events of mc-gyver's moves
                     elif event.key == K_RIGHT:
@@ -78,9 +80,6 @@ class Application:
                 #refreshing the window
                 self.maze.display(self.window)
                 pygame.display.flip()
-
-        else:
-            self.mc_gyver.endgame()
 
 
 # test

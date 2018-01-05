@@ -4,32 +4,20 @@
 import random
 import pygame
 import json
-import ClassMaze as maze
-import decor
+import maze
+import config
 
 
-class Object:
-    """
-    creation of the class Objects, allowing objects'creation on the maze
-    """
 
-    def __init__(self, maze, display):
-        #initializing the objects representation
-
-        self.display = display
-        self.structure = maze.structure
-        self.case_x = 0
-        self.case_y = 0
-
-
-class Syringe(Object):
+class Syringe:
     """
     creation of the class Syringe, composed of 3 elements randomly distributed on the maze
     """
     
     def __init__(self, maze, display):
         #initializing the syringe objects representation
-        super().__init__(maze, display)
+        self.display = display
+        self.structure = maze.structure
         self.syringe = list(self.display)
     
     def list_free_sprites(self):
