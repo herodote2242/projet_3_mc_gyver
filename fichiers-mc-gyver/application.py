@@ -23,15 +23,6 @@ class Application:
         #initializing application class
 
         pygame.init()
-        #creating instances from the different classes
-        self.maze = maze.Maze()
-        self.mc_gyver = mcgyver.McGyver(self.maze)
-        
-        #creating syringe
-        self.syringe = item.Syringe(self.maze, 'TNE')
-        self.syringe.list_free_sprites()
-        self.syringe.choose_free_sprites()
-
 
         #playing theme song looping for ever
         # -tc- pour mes tests: pygame.mixer.music.load('MacGyver_theme_song.mp3')
@@ -43,11 +34,19 @@ class Application:
         pygame.display.set_icon(self.icon)
         pygame.display.set_caption("Mc Gyver's Maze")
 
+        #creating instances from the different classes
+        self.maze = maze.Maze()
+        self.mc_gyver = mcgyver.McGyver(self.maze)
+        
+        #creating syringe
+        self.syringe = item.Syringe(self.maze, 'TNE')
+        self.syringe.list_free_sprites()
+        self.syringe.choose_free_sprites()
 
     def startgame(self):
         # -tc- Documenter cette méthode à l'aide d'une docstring
         #game loop
-        while not self.mc_gyver.endgame():
+        while not self.mc_gyver.endgame(self.window):
 
             pygame.time.Clock().tick(30)
             # a key has been pressed
@@ -86,6 +85,7 @@ class Application:
                 self.maze.display(self.window)
                 pygame.display.flip()
                 self.maze.show()
+    
 
 
 # test

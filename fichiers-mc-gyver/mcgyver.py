@@ -24,25 +24,16 @@ class McGyver:
         #super().__init__(maze, 'm')
         self.case_x = 1
         self.case_y = 1
-        #self.object_number = 0
-        self.end = self.get_end_position()
-        print(self.end)
+        self.object_number = 0
+        self.end_position = self.get_end_position()
 
-        # -tc- On recherche la position de fin
-        
+    # -tc- On recherche la position de fin
     def get_end_position(self):
         """-tc- Searches the end position in the labyrinth."""
         for i, line in enumerate(self.structure):
             for j, col in enumerate(line):
                 if self.structure[i][j] == 'e':
                     return i, j
-
-    def increment_object_number(self):
-        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
-        # function to count the number of picked up objects
-        if [self.case_x][self.case_y] in item.positions:
-            self.object_number += 1
-
 
     def move(self, direction):
         # -tc- Tu peux utiliser une docstring pour documenter cette méthode
@@ -57,6 +48,8 @@ class McGyver:
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_y += 1
                     #new position turns into mc-gyver's icon
+                    if self.structure[self.case_x][self.case_y] in ('T', 'N', 'E') :
+                        self.object_number += 1
                     self.structure[self.case_x][self.case_y] = self.display
 
         elif direction == 'left':
@@ -66,6 +59,8 @@ class McGyver:
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_y -= 1
                     #new position turns into mc-gyver's icon
+                    if self.structure[self.case_x][self.case_y] in ('T', 'N', 'E') :
+                        self.object_number += 1
                     self.structure[self.case_x][self.case_y] = self.display
 
 
@@ -76,6 +71,8 @@ class McGyver:
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_x -= 1
                     #new position turns into mc-gyver's icon
+                    if self.structure[self.case_x][self.case_y] in ('T', 'N', 'E') :
+                        self.object_number += 1
                     self.structure[self.case_x][self.case_y] = self.display
 
 
@@ -86,63 +83,60 @@ class McGyver:
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_x += 1
                     #new position turns into mc-gyver's icon
+                    if self.structure[self.case_x][self.case_y] in ('T', 'N', 'E') :
+                        self.object_number += 1
                     self.structure[self.case_x][self.case_y] = self.display
 
 
     # -tc- ma détection de la fin se fait correctement. Il faut maintenant
     # enlever les return et voir ce qui se passe après.
-    def endgame(self):
+    def endgame(self, window):
         # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         #condition of victory or defeat
         # -tc- ta condition est fausse!!!
         # if (self.case_x, self.case_y) == "e":
-        if (self.case_x, self.case_y) == self.end:
-            return True
+        if (self.case_x, self.case_y) == self.end_position:
             #victory
             if self.object_number == 3:
                 #guardian turns into a blood splatter
                 self.maze.guardian = pygame.image.load(config.image_youloose).convert_alpha()
+                self.maze.display(window)
                 #informing the player of the success, and if he wants to play again
-                victory = pygame.image.load(config.img_gamewon).convert()
+                victory = pygame.image.load(config.image_gamewon).convert()
                 window.blit(victory, (150,200))
-                for event in pygame.event.get():
-
-                    if event.type == QUIT:
-                        pygame.quit()
-
-                    elif event.type == KEYDOWN:
-
-                        #possibility of closing the window
-                        if event.key == K_ESCAPE:
-                            pygame.quit()
-
-                        #or playing again
-                        elif event.key == K_ENTER:
-                            application.Application()
+                pygame.display.flip()
 
             #defeat
             else:
-                return False
                 #Mc Gyver turns into a blood splatter
                 self.maze.mcgyver = pygame.image.load(config.image_youloose).convert_alpha()
+                self.maze.display(window)
                 #too bad for the player, he lost but can try again
-                defeat = pygame.image.load(config.img_gameover).convert()
+                defeat = pygame.image.load(config.image_gameover).convert()
                 window.blit(defeat, (150, 200))
-                for event in pygame.event.get():
+                pygame.display.flip()
 
-                    if event.type == QUIT:
+            for event in pygame.event.get():
+
+                if event.type == QUIT:
+                    pygame.quit()
+                    return True
+
+                elif event.type == KEYDOWN:
+
+                    #possibility of closing the window
+                    if event.key == K_ESCAPE:
                         pygame.quit()
+                        return True
 
-                    elif event.type == KEYDOWN:
+                    # or playing again
+                    elif event.key == K_ENTER:
+                        return True
+            return False
+        return False
+# test
 
-                        #possibility of closing the window
-                        if event.key == K_ESCAPE:
-                            pygame.quit()
 
-                        #or playing again
-                        elif event.key == K_ENTER:
-                            application.Application()
-#test
 def main():
     # -tc- Tu peux utiliser une docstring pour documenter cette fonction
     structure = maze.Maze()

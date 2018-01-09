@@ -16,13 +16,7 @@ class Maze:
     def __init__(self):
         # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         #sprites are displayed according to blanks, e, g, m, or # in structure_modifiable.json
-        with open('structure_modifiable.json', 'r') as f:
-            self.structure = json.load(f)
 
-
-    def display(self, window):
-        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
-        #method allowing the construction of the graphic maze with images
         self.wall = pygame.image.load(config.image_wall).convert()
         self.path = pygame.image.load(config.image_path).convert()
         self.guardian = pygame.image.load(config.image_guardian).convert_alpha()
@@ -31,6 +25,14 @@ class Maze:
         self.tube = pygame.image.load(config.image_tube).convert_alpha()
         self.ether = pygame.image.load(config.image_ether).convert_alpha()
         self.needle = pygame.image.load(config.image_needle).convert_alpha()
+
+        with open('structure_modifiable.json', 'r') as f:
+            self.structure = json.load(f)
+
+
+    def display(self, window):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
+        #method allowing the construction of the graphic maze with images
 
         for line_number, line in enumerate(self.structure):
 
