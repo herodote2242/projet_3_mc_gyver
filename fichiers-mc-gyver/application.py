@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+# -tc- Documenter le module à l'aide d'une docstring de module
 
 import sys
 import pygame
@@ -18,6 +19,7 @@ class Application:
     """
 
     def __init__(self, window=None, icon=None, m=None):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         #initializing application class
 
         pygame.init()
@@ -32,8 +34,8 @@ class Application:
 
 
         #playing theme song looping for ever
-        pygame.mixer.music.load('MacGyver_theme_song.mp3')
-        pygame.mixer.music.play(-1, 0.0)
+        # -tc- pour mes tests: pygame.mixer.music.load('MacGyver_theme_song.mp3')
+        # -tc- pour mes tests: pygame.mixer.music.play(-1, 0.0)
 
         #creating the window
         self.window = pygame.display.set_mode((600, 600), RESIZABLE)
@@ -43,6 +45,7 @@ class Application:
 
 
     def startgame(self):
+        # -tc- Documenter cette méthode à l'aide d'une docstring
         #game loop
         while not self.mc_gyver.endgame():
 
@@ -55,14 +58,16 @@ class Application:
 
                 if event.type == QUIT:
                     pygame.quit()
-                    sys.quit()
+                    # -tc- sys.quit() n'existe pas
+                    sys.exit()
 
                 elif event.type == KEYDOWN:
 
                     #possibility of closing the window
                     if event.key == K_ESCAPE:
                         pygame.quit()
-                        sys.quit()
+                        # -tc- sys.quit() n'existe pas
+                        sys.exit()
 
                     #events of mc-gyver's moves
                     elif event.key == K_RIGHT:
@@ -80,6 +85,7 @@ class Application:
                 #refreshing the window
                 self.maze.display(self.window)
                 pygame.display.flip()
+                self.maze.show()
 
 
 # test

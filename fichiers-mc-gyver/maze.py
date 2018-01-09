@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+# -tc- Documenter le module à l'aide d'une docstring de module
+
 import json
 import pygame
 import config
@@ -12,12 +14,14 @@ class Maze:
     """
 
     def __init__(self):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         #sprites are displayed according to blanks, e, g, m, or # in structure_modifiable.json
         with open('structure_modifiable.json', 'r') as f:
             self.structure = json.load(f)
 
 
     def display(self, window):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         #method allowing the construction of the graphic maze with images
         self.wall = pygame.image.load(config.image_wall).convert()
         self.path = pygame.image.load(config.image_path).convert()
@@ -68,11 +72,20 @@ class Maze:
                 elif sprite == "l":
                     window.blit(self.path, (x,y))
                     window.blit(self.blood, (x,y))
+    
+    def show(self):
+        """-tc- Displays the maze structure in text mode, for debug purpose."""
+        for line in self.structure:
+            for col in line:
+                print(col, end='')
+            print()
+        print("\n\n\n")
 
                 
 
 #testing if the maze is correctly loading
 def main():
+    # -tc- Tu peux utiliser une docstring pour documenter cette fonction
     pygame.init()
     window = pygame.display.set_mode((600, 600))
     #playing theme song looping for ever

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+# -tc- Documenter le module à l'aide d'une docstring de module
+
 import pygame
 from pygame.locals import *
 import item
@@ -14,6 +16,7 @@ class McGyver:
     """
 
     def __init__(self, maze, display = 'm'):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         # Mac Gyver's position
         self.display = display
         self.structure = maze.structure
@@ -22,15 +25,27 @@ class McGyver:
         self.case_x = 1
         self.case_y = 1
         #self.object_number = 0
+        self.end = self.get_end_position()
+        print(self.end)
 
+        # -tc- On recherche la position de fin
+        
+    def get_end_position(self):
+        """-tc- Searches the end position in the labyrinth."""
+        for i, line in enumerate(self.structure):
+            for j, col in enumerate(line):
+                if self.structure[i][j] == 'e':
+                    return i, j
 
     def increment_object_number(self):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         # function to count the number of picked up objects
         if [self.case_x][self.case_y] in item.positions:
             self.object_number += 1
 
 
     def move(self, direction):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
 
         WALL = '#'
 
@@ -74,9 +89,15 @@ class McGyver:
                     self.structure[self.case_x][self.case_y] = self.display
 
 
+    # -tc- ma détection de la fin se fait correctement. Il faut maintenant
+    # enlever les return et voir ce qui se passe après.
     def endgame(self):
+        # -tc- Tu peux utiliser une docstring pour documenter cette méthode
         #condition of victory or defeat
-        if (self.case_x, self.case_y) == "e":
+        # -tc- ta condition est fausse!!!
+        # if (self.case_x, self.case_y) == "e":
+        if (self.case_x, self.case_y) == self.end:
+            return True
             #victory
             if self.object_number == 3:
                 #guardian turns into a blood splatter
@@ -101,6 +122,7 @@ class McGyver:
 
             #defeat
             else:
+                return False
                 #Mc Gyver turns into a blood splatter
                 self.maze.mcgyver = pygame.image.load(config.image_youloose).convert_alpha()
                 #too bad for the player, he lost but can try again
@@ -122,6 +144,7 @@ class McGyver:
                             application.Application()
 #test
 def main():
+    # -tc- Tu peux utiliser une docstring pour documenter cette fonction
     structure = maze.Maze()
     mac = McGyver(structure)
 
