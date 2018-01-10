@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+"""This module is about the definition of the Mc Gyver's class, how he moves,
+how he picks up the objects and how he faces the guardian at the end."""
+
 import pygame
 from pygame.locals import *
 import item
@@ -8,119 +11,121 @@ import maze
 import application
 import config
 
-class McGyver:
-    """
-    creation of the class McGyver, allowing to define his position and its movement method
-    """
 
-    def __init__(self, maze, display = 'm'):
-        # Mac Gyver's position
+class McGyver:
+    """Creation of the class McGyver, allowing to define his position
+    and its movement method."""
+
+    def __init__(self, maze, display='m'):
+        """Defining the Mac Gyver's position and number of objects
+        picked up at the beginning."""
         self.display = display
         self.structure = maze.structure
         self.maze = maze
-        #super().__init__(maze, 'm')
         self.case_x = 1
         self.case_y = 1
-        #self.object_number = 0
+        self.object_number = 0
+        self.end_position = self.get_end_position()
 
-
-    def increment_object_number(self):
-        # function to count the number of picked up objects
-        if [self.case_x][self.case_y] in item.positions:
-            self.object_number += 1
-
+    def get_end_position(self):
+        """Searches the end position in the labyrinth."""
+        for i, line in enumerate(self.structure):
+            for j, col in enumerate(line):
+                if self.structure[i][i] == 'e':
+                    return i, j
 
     def move(self, direction):
-
+        """Defining the different moves, counting if an object is picked up and
+        updating the sprites after a move."""
         WALL = '#'
 
-        # defining the different moves
+        # Defining the different moves.
         if direction == 'right':
             if self.case_y < 14:
                 if self.structure[self.case_x][self.case_y+1] != WALL:
-                    #previous position turns back to a path
+                    # Previous position turns back to a path.
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_y += 1
-                    #new position turns into mc-gyver's icon
+                    # Adding 1 to object_number if an object is picked up.
+                    if self.structure[self.case_x][self.case_y]\
+                            in ('T', 'N', 'E'):
+                        self.object_number += 1
+                    # New position turns into mc-gyver's icon.
                     self.structure[self.case_x][self.case_y] = self.display
 
         elif direction == 'left':
-            if self.case_y > 0: 
+            if self.case_y > 0:
                 if self.structure[self.case_x][self.case_y-1] != WALL:
-                    #previous position turns back to a path
+                    # Previous position turns back to a path.
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_y -= 1
-                    #new position turns into mc-gyver's icon
+                    # Adding 1 to object_number if an object is picked up.
+                    if self.structure[self.case_x][self.case_y]\
+                            in ('T', 'N', 'E'):
+                        self.object_number += 1
+                    # New position turns into mc-gyver's icon.
                     self.structure[self.case_x][self.case_y] = self.display
-
 
         elif direction == 'up':
             if self.case_x > 0:
                 if self.structure[self.case_x-1][self.case_y] != WALL:
-                    #previous position turns back to a path
+                    # Previous position turns back to a path.
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_x -= 1
-                    #new position turns into mc-gyver's icon
+                    # Adding 1 to object_number if an object is picked up.
+                    if self.structure[self.case_x][self.case_y]\
+                            in ('T', 'N', 'E'):
+                        self.object_number += 1
+                    # New position turns into mc-gyver's icon.
                     self.structure[self.case_x][self.case_y] = self.display
-
 
         elif direction == 'down':
             if self.case_x < 14:
                 if self.structure[self.case_x+1][self.case_y] != WALL:
-                    #previous position turns back to a path
+                    # Previous position turns back to a path.
                     self.structure[self.case_x][self.case_y] = ' '
                     self.case_x += 1
-                    #new position turns into mc-gyver's icon
+                    # Adding 1 to object_number if an object is picked up.
+                    if self.structure[self.case_x][self.case_y]\
+                            in ('T', 'N', 'E'):
+                        self.object_number += 1
+                    # New position turns into mc-gyver's icon.
                     self.structure[self.case_x][self.case_y] = self.display
 
-
-    def endgame(self):
-        #condition of victory or defeat
-        if (self.case_x, self.case_y) == "e":
-            #victory
+    def endgame(self, window):
+        """Activating the end according victory or defeat."""
+        if (self.case_x, self.case_y) == self.end_position:
+            # Victory.
             if self.object_number == 3:
-                #guardian turns into a blood splatter
-                self.maze.guardian = pygame.image.load(config.image_youloose).convert_alpha()
-                #informing the player of the success, and if he wants to play again
-                victory = pygame.image.load(config.img_gamewon).convert()
-                window.blit(victory, (150,200))
-                for event in pygame.event.get():
+                # Guardian turns into a blood splatter.
+                self.maze.guardian = pygame.image.load(config.image_youloose)\
+                    .convert_alpha()
+                self.maze.display(window)
+                # Informing the player of the success.
+                victory = pygame.image.load(config.image_gamewon).convert()
+                window.blit(victory, (150, 200))
+                pygame.display.flip()
 
-                    if event.type == QUIT:
-                        pygame.quit()
-
-                    elif event.type == KEYDOWN:
-
-                        #possibility of closing the window
-                        if event.key == K_ESCAPE:
-                            pygame.quit()
-
-                        #or playing again
-                        elif event.key == K_ENTER:
-                            application.Application()
-
-            #defeat
+            # Defeat.
             else:
-                #Mc Gyver turns into a blood splatter
-                self.maze.mcgyver = pygame.image.load(config.image_youloose).convert_alpha()
-                #too bad for the player, he lost but can try again
-                defeat = pygame.image.load(config.img_gameover).convert()
+                # Mc Gyver turns into a blood splatter.
+                self.maze.mcgyver = pygame.image.load(config.image_youloose)\
+                    .convert_alpha()
+                self.maze.display(window)
+                # Too bad for the player, he lost.
+                defeat = pygame.image.load(config.image_gameover).convert()
                 window.blit(defeat, (150, 200))
-                for event in pygame.event.get():
+                pygame.display.flip()
 
-                    if event.type == QUIT:
-                        pygame.quit()
+            for event in pygame.event.get():
 
-                    elif event.type == KEYDOWN:
+                # Press any key to close.
+                if event.type == KEYDOWN:
+                    pygame.quit()
+                    sys.exit()
 
-                        #possibility of closing the window
-                        if event.key == K_ESCAPE:
-                            pygame.quit()
 
-                        #or playing again
-                        elif event.key == K_ENTER:
-                            application.Application()
-#test
+# Test
 def main():
     structure = maze.Maze()
     mac = McGyver(structure)

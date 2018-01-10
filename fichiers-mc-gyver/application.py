@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: Utf-8 -*
 
+"""
+This module is responsible of the creation of the game, its loops,
+and how it is supposed to react to the keyboard's events.
+"""
 
 import sys
 import pygame
@@ -11,60 +15,55 @@ import item
 import config
 
 
-
 class Application:
-    """
-    a class launching the game when opening labyrinth.py
-    """
+    """A class launching the game when opening labyrinth.py."""
 
     def __init__(self, window=None, icon=None, m=None):
-        #initializing application class
+        """Initializing application class."""
 
         pygame.init()
-        #creating instances from the different classes
-        self.maze = maze.Maze()
-        self.mc_gyver = mcgyver.McGyver(self.maze)
-        
-        #creating syringe
-        self.syringe = item.Syringe(self.maze, 'TNE')
-        self.syringe.list_free_sprites()
-        self.syringe.choose_free_sprites()
 
-
-        #playing theme song looping for ever
+        # Playing theme song looping for ever.
         pygame.mixer.music.load('MacGyver_theme_song.mp3')
         pygame.mixer.music.play(-1, 0.0)
 
-        #creating the window
+        # Creating the window.
         self.window = pygame.display.set_mode((600, 600), RESIZABLE)
         self.icon = pygame.image.load(config.small_icon)
         pygame.display.set_icon(self.icon)
         pygame.display.set_caption("Mc Gyver's Maze")
 
+        # Creating instances from the different classes.
+        self.maze = maze.Maze()
+        self.mc_gyver = mcgyver.McGyver(self.maze)
+
+        # Creating syringe.
+        self.syringe = item.Syringe(self.maze, 'TNE')
+        self.syringe.list_free_sprites()
+        self.syringe.choose_free_sprites()
 
     def startgame(self):
-        #game loop
-        while not self.mc_gyver.endgame():
+        """Creating the game loop."""
+        while not self.mc_gyver.endgame(self):
 
             pygame.time.Clock().tick(30)
-            # a key has been pressed
+            # A key has been pressed.
             pygame.event.pump()
-
 
             for event in pygame.event.get():
 
                 if event.type == QUIT:
                     pygame.quit()
-                    sys.quit()
+                    sys.exit()
 
                 elif event.type == KEYDOWN:
 
-                    #possibility of closing the window
+                    # Possibility of closing the window.
                     if event.key == K_ESCAPE:
                         pygame.quit()
-                        sys.quit()
+                        sys.exit()
 
-                    #events of mc-gyver's moves
+                    # Events of mc-gyver's moves.
                     elif event.key == K_RIGHT:
                         self.mc_gyver.move('right')
 
@@ -77,12 +76,12 @@ class Application:
                     elif event.key == K_DOWN:
                         self.mc_gyver.move('down')
 
-                #refreshing the window
+                # Refreshing the window.
                 self.maze.display(self.window)
                 pygame.display.flip()
 
 
-# test
+# Test.
 def main():
     app = Application()
 

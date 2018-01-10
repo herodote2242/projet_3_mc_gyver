@@ -2,9 +2,7 @@
 # -*- coding: Utf-8 -*
 
 
-"""
-defining the different elements of the window
-"""
+"""This module defines the different elements of the window."""
 
 sprite_number = 15
 sprite_dimension = 40
