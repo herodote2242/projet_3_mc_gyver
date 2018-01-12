@@ -6,6 +6,7 @@ how he picks up the objects and how he faces the guardian at the end."""
 
 import pygame
 from pygame.locals import *
+import sys
 import item
 import maze
 import application
@@ -31,7 +32,7 @@ class McGyver:
         """Searches the end position in the labyrinth."""
         for i, line in enumerate(self.structure):
             for j, col in enumerate(line):
-                if self.structure[i][i] == 'e':
+                if self.structure[i][j] == 'e':
                     return i, j
 
     def move(self, direction):
@@ -98,7 +99,7 @@ class McGyver:
             # Victory.
             if self.object_number == 3:
                 # Guardian turns into a blood splatter.
-                self.maze.guardian = pygame.image.load(config.image_youloose)\
+                self.maze.guardian = pygame.image.load(config.image_youlose)\
                     .convert_alpha()
                 self.maze.display(window)
                 # Informing the player of the success.
@@ -109,7 +110,7 @@ class McGyver:
             # Defeat.
             else:
                 # Mc Gyver turns into a blood splatter.
-                self.maze.mcgyver = pygame.image.load(config.image_youloose)\
+                self.maze.macgyver = pygame.image.load(config.image_youlose)\
                     .convert_alpha()
                 self.maze.display(window)
                 # Too bad for the player, he lost.
@@ -118,7 +119,6 @@ class McGyver:
                 pygame.display.flip()
 
             for event in pygame.event.get():
-
                 # Press any key to close.
                 if event.type == KEYDOWN:
                     pygame.quit()
@@ -129,6 +129,7 @@ class McGyver:
 def main():
     structure = maze.Maze()
     mac = McGyver(structure)
+
 
 if __name__ == "__main__":
     main()

@@ -71,7 +71,7 @@ class Maze:
                 # Image of defeated character.
                 elif sprite == "l":
                     window.blit(self.path, (x, y))
-                    window.blit(self.blood, (x, y))
+                    window.blit(self.image_youlose, (x, y))
 
 
 # Test.
@@ -90,6 +90,7 @@ def main():
             if event.type == pygame.QUIT:
                 end = True
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()

@@ -44,7 +44,7 @@ class Application:
 
     def startgame(self):
         """Creating the game loop."""
-        while not self.mc_gyver.endgame(self):
+        while not self.mc_gyver.endgame(self.window):
 
             pygame.time.Clock().tick(30)
             # A key has been pressed.
@@ -63,7 +63,7 @@ class Application:
                         pygame.quit()
                         sys.exit()
 
-                    # Events of mc-gyver's moves.
+                    # Events of Mc Gyver's moves.
                     elif event.key == K_RIGHT:
                         self.mc_gyver.move('right')
 
@@ -84,6 +84,7 @@ class Application:
 # Test.
 def main():
     app = Application()
+
 
 if __name__ == "__main__":
     main()
