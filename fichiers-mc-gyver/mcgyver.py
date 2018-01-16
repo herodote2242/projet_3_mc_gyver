@@ -7,7 +7,7 @@ how he picks up the objects and how he faces the guardian at the end."""
 import pygame
 from pygame.locals import *
 import sys
-import item
+import syringe
 import maze
 import application
 import config
@@ -97,7 +97,7 @@ class McGyver:
         """Activating the end according victory or defeat."""
         if (self.case_x, self.case_y) == self.end_position:
             # Victory.
-            if self.object_number == 3:
+            if self.object_number == len(config.syringe_elements):
                 # Guardian turns into a blood splatter.
                 self.maze.guardian = pygame.image.load(config.image_youlose)\
                     .convert_alpha()

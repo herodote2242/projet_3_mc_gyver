@@ -11,7 +11,7 @@ import pygame
 from pygame.locals import *
 import maze
 import mcgyver
-import item
+import syringe
 import config
 
 
@@ -38,7 +38,7 @@ class Application:
         self.mc_gyver = mcgyver.McGyver(self.maze)
 
         # Creating syringe.
-        self.syringe = item.Syringe(self.maze, 'TNE')
+        self.syringe = syringe.Syringe(self.maze)
         self.syringe.list_free_sprites()
         self.syringe.choose_free_sprites()
 

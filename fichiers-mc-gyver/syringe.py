@@ -15,11 +15,10 @@ class Syringe:
     """Creation of the class Syringe, composed of 3 elements randomly
     distributed on the maze."""
 
-    def __init__(self, maze, display):
+    def __init__(self, maze):
         """Initializing the syringe objects representation."""
-        self.display = display
         self.structure = maze.structure
-        self.syringe = list(self.display)
+        self.syringe = config.items
 
     def list_free_sprites(self):
         """A function listing all the free sprites on the maze."""

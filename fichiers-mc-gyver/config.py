@@ -19,3 +19,5 @@ image_tube = "images/img_tube.png"
 image_youlose = "images/img_youlose.png"
 image_gamewon = "images/img_gamewon.png"
 image_gameover = "images/img_gameover.png"
+syringe_elements = ["tube", "needle", "ether"]
+items = [element.upper()[0] for element in syringe_elements]
