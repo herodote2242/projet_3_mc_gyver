@@ -73,7 +73,9 @@ class Maze:
                     window.blit(self.path, (x, y))
                     window.blit(self.image_youlose, (x, y))
 
-
+def is_wall():
+    if sprite == "#":
+        return True
 # Test.
 def main():
     pygame.init()
